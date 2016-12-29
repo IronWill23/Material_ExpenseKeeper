@@ -4,7 +4,7 @@ ExpenseKeeper
 
 ## Goal
 
-A part-time or after work project to worked as a playground to practice the latest skills and improve my existing skills.
+A part-time or after work project, which is worked as a playground to practice the latest skills and improve my existing skills.
 
 Done:
 </br>1) Material Design + Costume Views + Material Animation(RecyclerView, CardView, Spinner, Drawer, FloatingActionButton, ExplosionView, PageCurl, Behavior Programming, Fragment Transition, Object Animation and so on).
@@ -14,6 +14,7 @@ ToDo:
 </br>1) Using Nodejs StrongLoop build Restful Api.
 </br>2) Setup the Disk/MemoryLruCache and MongoDB.
 </br>3) Immigrate the Native App to Hybrid by using ReactJs.
+</br>4) Customerize Icons and Action Listener.
 
 ### ScreenShots and Gif
 ![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/expenseKeeper.gif)
