@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar_container"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/abc_action_bar_default_height_material"
+    android:background="@drawable/top_background"
+    android:orientation="horizontal">
+
+    <com.balysv.materialmenu.MaterialMenuView
+        android:id="@+id/material_menu_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="4dp"
+        app:mm_color="#FFFFFF"
+        app:mm_strokeWidth="2"
+        app:mm_transformDuration="1000" />
+
+    <com.library.ironwill.expensekeeper.view.MaterialSpinner.MaterialSpinner
+        android:id="@+id/spinner_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:ms_dropdown_height="250dp"
+        app:ms_dropdown_max_height="300dp" />
+</LinearLayout>

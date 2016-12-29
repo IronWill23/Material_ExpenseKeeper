@@ -1,0 +1,44 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/endRed</item>
+        <item name="colorAccent">@color/startRed</item>
+    </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="colorPrimaryDark">@color/endRed</item>
+        <item name="android:windowBackground">@drawable/material_start</item>
+    </style>
+
+    <!--ToolBar定制
+    <style name="ToolBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/startRed</item>
+        <item name="theme">@style/ToolBarTheme</item>
+        <item name="popupTheme">@style/ToolBarPopupTheme</item>
+    </style>
+
+    <style name="ToolBarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/abc_primary_text_material_dark</item>
+        <item name="android:textColorSecondary">@color/abc_primary_text_material_dark</item>
+        &lt;!&ndash;<item name="android:colorBackground">@color/myPrimaryColor</item>&ndash;&gt;
+    </style>
+
+    <style name="ToolBarPopupTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/abc_primary_text_material_light</item>
+        <item name="android:textColorSecondary">@color/abc_primary_text_material_light</item>
+        <item name="android:colorBackground">@color/middleRed</item>
+    </style>-->
+
+    <!--popup Animation-->
+    <style name="popup_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <!-- 指定显示时的动画xml -->
+        <item name="android:windowExitAnimation">@anim/popup_hide</item>
+        <!-- 指定消失时的动画xml -->
+    </style>
+
+</resources>

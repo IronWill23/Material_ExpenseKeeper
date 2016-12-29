@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+<!--<color name="colorPrimaryDark">#fe4c89</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="myPrimaryColor">#ff3e8b</color>-->
+    <color name="white">#FFFFFF</color>
+    <color name="almost_white">#EEEEEE</color>
+    <color name="lawnGreen">#7CFC00</color>
+
+    <color name="forestGreen">#229422</color><!--森林绿 -->
+
+    <color name="blue">#379aff</color>
+    <color name="skyBlue">#5ac0ea</color>
+    <color name="skyBlue_light">#665ac0ea</color>
+    <color name="skyBlue_pressed_light">#880793cc</color>
+    <color name="lightRed">#f06679</color><!--暗深红色 -->
+    <color name="startRed">#e43d61</color>
+    <color name="middleRed">#ea4765</color>
+    <color name="endRed">#ec6877</color>
+
+
+    <color name="gray_cc">#cfcfcf</color><!--灰色cc -->
+    <color name="gray_b1">#a5a5a5</color>
+    <color name="gray_8f">#aa9f9f9f</color><!--灰色8f -->
+
+
+</resources>

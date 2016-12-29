@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_container" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--Drawer主布局-->
+        <LinearLayout
+            android:id="@+id/full_screen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:id="@+id/rl_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/top_background">
+
+                <TextView
+                    android:id="@+id/tv_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="40dp"
+                    android:text="@string/income"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/num_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_income"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/tv_income"
+                    android:text="$7000"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.library.ironwill.expensekeeper.view.ArcProgress.ArcProgress
+                    android:id="@+id/arc_progress"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_centerHorizontal="true"
+                    app:arc_bottom_text="Spent"
+                    app:arc_progress="40" />
+
+                <TextView
+                    android:id="@+id/tv_expense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_income"
+                    android:layout_marginLeft="25dp"
+                    android:layout_toRightOf="@+id/arc_progress"
+                    android:text="@string/expense"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/num_expense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_income"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/tv_expense"
+                    android:text="$3000"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/arc_progress"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="6dp"
+                    android:text="Balance: $4000"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/base_fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/almost_white">
+
+                <View
+                    android:id="@+id/base_fragment_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <FrameLayout
+                    android:id="@+id/base_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:fab="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true">
+
+                    <RelativeLayout
+                        android:id="@+id/id_rl_bottomSheet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/skyBlue_pressed_light"
+                        android:elevation="4dp"
+                        android:gravity="bottom"
+                        app:behavior_hideable="true"
+                        app:behavior_peekHeight="0dp"
+                        app:layout_behavior="@string/bottom_sheet_behavior">
+
+                        <TextView
+                            android:id="@+id/id_tv_new"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Add New Expense Category:"
+                            android:textSize="20sp" />
+
+                        <EditText
+                            android:id="@+id/id_et_new_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/id_tv_new"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/edit_text_frame"
+                            android:elevation="4dp"
+                            android:hint="Category Name"
+                            android:lines="1" />
+
+                        <EditText
+                            android:id="@+id/id_et_new_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/id_et_new_name"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/edit_text_frame"
+                            android:elevation="4dp"
+                            android:gravity="top"
+                            android:hint="Expense number"
+                            android:lines="2" />
+
+                    </RelativeLayout>
+
+                    <com.library.ironwill.expensekeeper.view.FloatingButtonFamiliy.FloatingActionButton
+                        android:id="@+id/fab_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:clickable="true"
+                        android:elevation="4dp"
+                        app:layout_anchor="@+id/id_rl_bottomSheet"
+                        app:layout_anchorGravity="right|top"
+                        fab:fab_colorNormal="@color/skyBlue_pressed_light"
+                        fab:fab_colorPressed="@color/skyBlue_pressed_light"
+                        fab:fab_icon="@drawable/ic_add"
+                        fab:fab_size="normal" />
+
+                    <com.library.ironwill.expensekeeper.view.FloatingButtonFamiliy.FloatingActionButton
+                        android:id="@+id/fab_done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="74dp"
+                        android:clickable="true"
+                        android:elevation="4dp"
+                        android:visibility="gone"
+                        app:layout_anchor="@+id/id_rl_bottomSheet"
+                        app:layout_anchorGravity="right|top"
+                        fab:fab_colorNormal="@color/skyBlue_pressed_light"
+                        fab:fab_colorPressed="@color/skyBlue_pressed_light"
+                        fab:fab_icon="@drawable/ic_done"
+                        fab:fab_size="normal" />
+                </android.support.design.widget.CoordinatorLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

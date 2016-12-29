@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--fab ids-->
+    <item name="fab_expand_menu_button" type="id" />
+    <item name="fab_label" type="id" />
+    <!--drawer-->
+    <item name="material_drawer_item_custom_url_item" type="id" />
+    <item name="material_drawer_item_icon_only" type="id" />
+    <item name="material_drawer_item_centered_primary" type="id" />
+    <item name="material_drawer_item_overflow_menu" type="id" />
+    <item name="material_drawer_profile_item_divider" type="id" />
+</resources>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--Material Spinner-->
+    <declare-styleable name="MaterialSpinner" tools:ignore="ResourceName">
+        <attr name="ms_arrow_tint" format="color" />
+        <attr name="ms_hide_arrow" format="boolean" />
+        <attr name="ms_background_color" format="color" />
+        <attr name="ms_text_color" format="color" />
+        <attr name="ms_dropdown_max_height" format="dimension" />
+        <attr name="ms_dropdown_height" format="dimension">
+            <enum name="fill_parent" value="-1" />
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ArcProgress">
+        <attr name="arc_progress" format="integer"/>
+        <attr name="arc_angle" format="float"/>
+        <attr name="arc_stroke_width" format="dimension"/>
+        <attr name="arc_max" format="integer"/>
+
+        <attr name="arc_unfinished_color" format="color"/>
+        <attr name="arc_finished_color" format="color"/>
+
+        <attr name="arc_text_size" format="dimension"/>
+        <attr name="arc_text_color" format="color"/>
+
+        <attr name="arc_suffix_text" format="string"/>
+        <attr name="arc_suffix_text_size" format="dimension"/>
+        <attr name="arc_suffix_text_padding" format="dimension"/>
+
+        <attr name="arc_bottom_text" format="string"/>
+        <attr name="arc_bottom_text_size" format="dimension"/>
+    </declare-styleable>
+
+    <!--FAB-->
+    <declare-styleable name="FloatingActionButton">
+        <attr name="fab_colorPressed" format="color" />
+        <attr name="fab_colorDisabled" format="color" />
+        <attr name="fab_colorNormal" format="color" />
+        <attr name="fab_icon" format="reference" />
+        <attr name="fab_size" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="mini" value="1" />
+        </attr>
+        <attr name="fab_title" format="string" />
+        <attr name="fab_stroke_visible" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="AddFloatingActionButton">
+        <attr name="fab_plusIconColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="FloatingActionsMenu">
+        <attr name="fab_addButtonColorPressed" format="color" />
+        <attr name="fab_addButtonColorNormal" format="color" />
+        <attr name="fab_addButtonSize" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="mini" value="1" />
+        </attr>
+        <attr name="fab_addButtonPlusIconColor" format="color" />
+        <attr name="fab_addButtonStrokeVisible" format="boolean" />
+        <attr name="fab_labelStyle" format="reference" />
+        <attr name="fab_labelsPosition" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="fab_expandDirection" format="enum">
+            <enum name="up" value="0" />
+            <enum name="down" value="1" />
+            <enum name="left" value="2" />
+            <enum name="right" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ArcProgresss">
+        <attr name="radius" format="dimension"/>
+        <attr name="stripeWidth" format="dimension"/><!--色带宽度-->
+        <attr name="percent" format="integer"/><!--百分比 最大值为100-->
+        <attr name="smallColor" format="color"/><!--色带宽度-->
+        <!--外圈颜色-->
+        <attr name="bigColor" format="color"/>
+
+        <!--中间字体颜色-->
+        <attr name="centerTextSize" format="dimension"/>
+        <!--色带宽度-->
+        <attr name="bottomText" format="string"/>
+        <attr name="bottomTextSize" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="PageCurlView">
+        <!-- Enable/Disable debug mode -->
+        <attr name="enableDebugMode" format="boolean" />
+        <!-- Curl speed  the animation moves in px/frame -->
+        <attr name="curlSpeed" format="integer" />
+        <!-- FPS our animation will run -->
+        <attr name="updateRate" format="integer" />
+        <!-- Pixel offset the page will have from the curl edge -->
+        <attr name="initialEdgeOffset" format="integer" />
+        <!-- The curl mode to apply -->
+        <attr name="curlMode">
+            <enum name="Simple" value="0" />
+            <enum name="Dynamic" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>
