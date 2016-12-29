@@ -8,7 +8,7 @@ A part-time or after work project to worked as a playground to practice the late
 
 ### ScreenShots and Gif
 ![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/expenseKeeper.gif)
-![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/expenseKeeper.png)
+![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/expenseTracker.png)
 
 ## Authors
 
