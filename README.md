@@ -7,8 +7,8 @@ ExpenseKeeper
 A part-time or after work project to worked as a playground to practice the latest skills and improve my existing skills.
 
 ### ScreenShots and Gif
-
-
+![My image](IronWill23.github.com/repository/preview/expenseKeeper.png)
+![My image](IronWill23.github.com/repository/preview/expenseKeeper.gif)
 
 ## Authors
 
