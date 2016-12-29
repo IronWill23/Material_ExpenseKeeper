@@ -4,7 +4,7 @@ ExpenseKeeper
 
 ## Goal
 
-A part-time or after work project, which is worked as a playground to practice the latest skills and improve my existing skills.
+Keep spending some time on DIY project after work or part-time, it can be worked as a good playground to practice the latest skills and improve my existing skills.
 
 Done:
 </br>1) Material Design + Costume Views + Material Animation(RecyclerView, CardView, Spinner, Drawer, FloatingActionButton, ExplosionView, PageCurl, Behavior Programming, Fragment Transition, Object Animation and so on).
