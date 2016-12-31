@@ -18,12 +18,12 @@ public class Navigator {
 
     public static void launchDetail(MainActivity fromActivity, View fromView, View backgroundView) {
         ViewCompat.setTransitionName(fromView, "detail_element");
-        ViewCompat.setTransitionName(fromActivity.findViewById(R.id.fab_add), "fab");
+//        ViewCompat.setTransitionName(fromActivity.findViewById(R.id.fab_add), "fab");
         ActivityOptionsCompat options =
                 TransitionHelper.makeOptionsCompat(
                         fromActivity,
-                        Pair.create(fromView, "detail_element"),
-                        Pair.create(fromActivity.findViewById(R.id.fab_add), "fab")
+                        Pair.create(fromView, "detail_element")
+//                        Pair.create(fromActivity.findViewById(R.id.fab_add), "fab")
                 );
         Intent intent = new Intent(fromActivity, MainActivity.class);
 //        intent.putExtra("item_text", item.getCategoryName());

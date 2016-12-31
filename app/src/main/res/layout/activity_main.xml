@@ -18,7 +18,6 @@
             android:fitsSystemWindows="true"
             android:orientation="vertical">
 
-
             <RelativeLayout
                 android:id="@+id/rl_container"
                 android:layout_width="match_parent"
@@ -107,89 +106,6 @@
                     android:id="@+id/base_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-
-                <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fitsSystemWindows="true">
-
-                    <RelativeLayout
-                        android:id="@+id/id_rl_bottomSheet"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:background="@color/skyBlue_pressed_light"
-                        android:elevation="4dp"
-                        android:gravity="bottom"
-                        app:behavior_hideable="true"
-                        app:behavior_peekHeight="0dp"
-                        app:layout_behavior="@string/bottom_sheet_behavior">
-
-                        <TextView
-                            android:id="@+id/id_tv_new"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            android:text="Add New Expense Category:"
-                            android:textSize="20sp" />
-
-                        <EditText
-                            android:id="@+id/id_et_new_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/id_tv_new"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/edit_text_frame"
-                            android:elevation="4dp"
-                            android:hint="Category Name"
-                            android:lines="1" />
-
-                        <EditText
-                            android:id="@+id/id_et_new_num"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/id_et_new_name"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/edit_text_frame"
-                            android:elevation="4dp"
-                            android:gravity="top"
-                            android:hint="Expense number"
-                            android:lines="2" />
-
-                    </RelativeLayout>
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/fab_add"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:clickable="true"
-                        android:elevation="4dp"
-                        android:src="@drawable/ic_add"
-                        app:backgroundTint="@color/skyBlue"
-                        app:fabSize="normal"
-                        app:layout_anchor="@+id/id_rl_bottomSheet"
-                        app:layout_anchorGravity="right|top"
-                        app:layout_behavior="com.library.ironwill.expensekeeper.behavior.FAB_onScrollBehavior" />
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/fab_done"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginRight="74dp"
-                        android:clickable="true"
-                        android:elevation="4dp"
-                        android:src="@drawable/ic_done"
-                        android:visibility="gone"
-                        app:backgroundTint="@color/skyBlue"
-                        app:fabSize="normal"
-                        app:layout_anchor="@+id/id_rl_bottomSheet"
-                        app:layout_anchorGravity="right|top" />
-                </android.support.design.widget.CoordinatorLayout>
 
             </RelativeLayout>
         </LinearLayout>

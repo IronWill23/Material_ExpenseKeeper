@@ -1,15 +1,11 @@
 package com.library.ironwill.expensekeeper.activity;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,11 +50,6 @@ public class MainActivity extends TransitionHelper.BaseActivity {
     private MaterialMenuView homeButton;
     public View fragmentBackground;
 
-    public FloatingActionButton addFABtn, doneFABtn;
-    private BottomSheetBehavior mBehavior;
-    private View mBottomSheet;
-    private EditText titleText, contentText;
-
     //Material DrawerLayout
     private IProfile profile, profile2, profile3, profile4, profile5;
     private AccountHeader headerResult = null;
@@ -85,8 +76,6 @@ public class MainActivity extends TransitionHelper.BaseActivity {
 //        mArcProgress.setProgress(100 * per);
         mArcProgress.setProgress(42);
         initBaseFragment(savedInstanceState);
-        initClickAction();
-
     }
 
     private void initDrawer(Bundle savedInstanceState) {
@@ -185,84 +174,6 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         super.onSaveInstanceState(outState);
     }
 
-    private void initClickAction() {
-        /**
-         * BottomSheet Behavior programming
-         */
-        if (mBottomSheet != null) {
-            mBehavior = BottomSheetBehavior.from(mBottomSheet);
-        }
-
-        mBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-
-                if (mBehavior.getState()==BottomSheetBehavior.STATE_DRAGGING){
-                    mBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
-                if (mBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                    doneFABtn.setVisibility(View.VISIBLE);
-                } else {
-                    doneFABtn.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
-        });
-
-        addFABtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                    mBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    openMenu(view);
-                } else {
-                    mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    closeMenu(view);
-                }
-            }
-
-            private void openMenu(View view) {
-                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", 0, 65, 135);
-                animator.setDuration(600);
-                animator.start();
-            }
-
-            private void closeMenu(View view) {
-                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", 135, 65, 0);
-                animator.setDuration(600);
-                animator.start();
-            }
-        });
-        doneFABtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*if (!titleText.getText().toString().equals("") && !contentText.getText().toString().equals("")) {
-
-                    mList.add(new ItemCategory(
-                            R.mipmap.ic_launcher,
-                            titleText.getText().toString(),
-                            contentText.getText().toString(),
-                            0
-                    ));
-                    mAdapter = new RvCategoryAdapter(MainActivity.this, mList);
-                    mRecyclerView.setAdapter(mAdapter);
-                    mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                    titleText.setText("");
-                    contentText.setText("");
-                } else {
-                    Toast.makeText(MainActivity.this, "Title and comment can not be null!",
-                            Toast.LENGTH_SHORT).show();
-                }*/
-            }
-        });
-    }
-
     private void initToolbar() {
         //setup the Action for Material Menu
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -330,11 +241,6 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         homeButton = (MaterialMenuView) findViewById(R.id.material_menu_button);
         fragmentBackground = findViewById(R.id.base_fragment_background);
         mSpinner = (MaterialSpinner) findViewById(R.id.spinner_date);
-        addFABtn = (FloatingActionButton) findViewById(R.id.fab_add);
-        doneFABtn = (FloatingActionButton) findViewById(R.id.fab_done);
-        mBottomSheet = findViewById(R.id.id_rl_bottomSheet);
-        titleText = (EditText) findViewById(R.id.id_et_new_name);
-        contentText = (EditText) findViewById(R.id.id_et_new_num);
     }
 
     public boolean animateHomeIcon(MaterialMenuDrawable.IconState iconState) {

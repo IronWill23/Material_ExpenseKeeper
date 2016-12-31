@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 
 
-public class FAB_onScrollBehavior extends FloatingActionButton.Behavior {
+public class FABonScrollBehavior extends FloatingActionButton.Behavior {
 
-    public FAB_onScrollBehavior(Context context, AttributeSet attrs) {
-        super();
+    public FABonScrollBehavior(Context context, AttributeSet attrs) {
+        super(context, attrs);
     }
 
     @Override

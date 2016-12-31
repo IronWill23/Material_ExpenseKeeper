@@ -81,8 +81,8 @@ public class CardDetailFragment extends TransitionHelper.BaseFragment {
     @Override
     public void onBeforeViewShows(View contentView) {
         ViewCompat.setTransitionName(mScrollView, "detail_element");
-        ViewCompat.setTransitionName(getActivity().findViewById(R.id.fab_add), "fab");
-        MainActivity.of(getActivity()).addFABtn.setTranslationY(400);
+//        ViewCompat.setTransitionName(getActivity().findViewById(R.id.fab_add), "fab");
+//        MainActivity.of(getActivity()).addFABtn.setTranslationY(400);
 
         TransitionHelper.excludeEnterTarget(getActivity(), R.id.toolbar_container, true);
         TransitionHelper.excludeEnterTarget(getActivity(), R.id.full_screen, true);
