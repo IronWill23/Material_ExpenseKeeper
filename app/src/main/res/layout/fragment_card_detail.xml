@@ -7,12 +7,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/detail_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="1dp"
             android:layout_marginTop="1dp"
             android:background="@android:color/white"
@@ -47,35 +47,10 @@
                     android:fontFamily="sans-serif-light"
                     android:lineSpacingMultiplier="1.2"
                     android:paddingTop="8dp"
-                    android:text="I sincerely miss those heavy metal bands
-I used to go see on the landing in the summer
-She fell in love with the drummer
-She fell in love with the drummer
-She fell in love
+                    android:text="React Native is the next generation of React - a Javascript code library developed by Facebook and Instagram, which was released on Github in 2013. Native app creation means writing apps for a specific operating system. ©iStock/ React Native helps developers reuse code across the web and on mobile.
 \n\n
-Shiny, shiny pants and bleach-blond hair
-A double kick drum by the river in the summer
-She fell in love with the drummer
-Another and another
-She fell in love
-\n\n
-I miss the innocence I've known
-Playing KISS covers, beautiful and stoned
+Android and iOS have very different codebases and startups and businesses often struggle to hire - or afford- engineers for both. Now just one developer can write across different mobile operating systems."
 
-Unlock my body and move myself to dance
-Moving warm liquid, flowing blowing glass
-Classical music blasting masks the ringing in my ears
-\n\n
-I sincerely miss those heavy metal bands
-I used to go see on the landing in the summer
-She fell in love with the drummer
-She fell in love with another
-She fell in love
-\n\n
-I miss the innocence I've known
-Playing KISS covers, beautiful and stoned
-Playing KISS covers, beautiful and stoned
-Playing KISS covers, beautiful and stoned"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
             </LinearLayout>
         </android.support.v7.widget.CardView>

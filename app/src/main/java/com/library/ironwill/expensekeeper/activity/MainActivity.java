@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,10 +25,9 @@ import com.library.ironwill.expensekeeper.fragment.CardListFragment;
 import com.library.ironwill.expensekeeper.helper.TransitionHelper;
 import com.library.ironwill.expensekeeper.util.BitmapUtil;
 import com.library.ironwill.expensekeeper.view.ArcProgress.ArcProgress;
-import com.library.ironwill.expensekeeper.view.FloatingButtonFamiliy.FloatingActionButton;
-import com.library.ironwill.expensekeeper.view.MaterialSpinner.MaterialSpinner;
 import com.library.ironwill.expensekeeper.view.DrawerItems.CustomPrimaryDrawerItem;
 import com.library.ironwill.expensekeeper.view.DrawerItems.OverflowMenuDrawerItem;
+import com.library.ironwill.expensekeeper.view.MaterialSpinner.MaterialSpinner;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -226,14 +226,14 @@ public class MainActivity extends TransitionHelper.BaseActivity {
             }
 
             private void openMenu(View view) {
-                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", 0, 205, 405);
-                animator.setDuration(800);
+                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", 0, 65, 135);
+                animator.setDuration(600);
                 animator.start();
             }
 
             private void closeMenu(View view) {
-                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", 405, 205, 0);
-                animator.setDuration(800);
+                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", 135, 65, 0);
+                animator.setDuration(600);
                 animator.start();
             }
         });

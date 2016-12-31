@@ -77,19 +77,19 @@ public class RandomTextView extends TextView {
         switch (pianyiliangTpye) {
             case FIRSTF_FIRST:
                 for (int i = 0; i < text.length(); i++) {
-                    pianyilianglist[i] = 20 - i;
+                    pianyilianglist[i] = 7 - i;
                 }
 
                 break;
             case FIRSTF_LAST:
                 for (int i = 0; i < text.length(); i++) {
-                    pianyilianglist[i] = 15 + i;
+                    pianyilianglist[i] = 7 + i;
                 }
 
                 break;
             case ALL:
                 for (int i = 0; i < text.length(); i++) {
-                    pianyilianglist[i] = 15;
+                    pianyilianglist[i] = 7;
                 }
 
                 break;

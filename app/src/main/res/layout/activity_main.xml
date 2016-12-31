@@ -109,7 +109,6 @@
                     android:layout_height="match_parent" />
 
                 <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-                    xmlns:fab="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true">
@@ -162,35 +161,34 @@
 
                     </RelativeLayout>
 
-                    <com.library.ironwill.expensekeeper.view.FloatingButtonFamiliy.FloatingActionButton
+                    <android.support.design.widget.FloatingActionButton
                         android:id="@+id/fab_add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_margin="15dp"
                         android:clickable="true"
                         android:elevation="4dp"
+                        android:src="@drawable/ic_add"
+                        app:backgroundTint="@color/skyBlue"
+                        app:fabSize="normal"
                         app:layout_anchor="@+id/id_rl_bottomSheet"
                         app:layout_anchorGravity="right|top"
-                        fab:fab_colorNormal="@color/skyBlue_pressed_light"
-                        fab:fab_colorPressed="@color/skyBlue_pressed_light"
-                        fab:fab_icon="@drawable/ic_add"
-                        fab:fab_size="normal" />
+                        app:layout_behavior="com.library.ironwill.expensekeeper.behavior.FAB_onScrollBehavior" />
 
-                    <com.library.ironwill.expensekeeper.view.FloatingButtonFamiliy.FloatingActionButton
+                    <android.support.design.widget.FloatingActionButton
                         android:id="@+id/fab_done"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="15dp"
                         android:layout_marginRight="74dp"
                         android:clickable="true"
                         android:elevation="4dp"
+                        android:src="@drawable/ic_done"
                         android:visibility="gone"
+                        app:backgroundTint="@color/skyBlue"
+                        app:fabSize="normal"
                         app:layout_anchor="@+id/id_rl_bottomSheet"
-                        app:layout_anchorGravity="right|top"
-                        fab:fab_colorNormal="@color/skyBlue_pressed_light"
-                        fab:fab_colorPressed="@color/skyBlue_pressed_light"
-                        fab:fab_icon="@drawable/ic_done"
-                        fab:fab_size="normal" />
+                        app:layout_anchorGravity="right|top" />
                 </android.support.design.widget.CoordinatorLayout>
 
             </RelativeLayout>

@@ -34,13 +34,11 @@ public class CardListFragment extends TransitionHelper.BaseFragment{ // implemen
     private ItemTouchHelper mItemTouchHelper;
 
 
-    private static int[] digits = new int[] {10,9,8,7,6};
-
     public CardListFragment() {}
 
     protected ArrayList<ItemCategory> getList() {
         mList = new ArrayList<>();
-        mCategory = new ItemCategory(R.mipmap.ic_launcher, "FreeLancing", "$ " + 235, 1);
+        mCategory = new ItemCategory(R.mipmap.ic_launcher, "Salary", "$ " + 235, 1);
         mList.add(0, mCategory);
         mCategory = new ItemCategory(R.mipmap.ic_launcher, "Food", "$ " + 40, 0);
         mList.add(1, mCategory);
@@ -50,6 +48,8 @@ public class CardListFragment extends TransitionHelper.BaseFragment{ // implemen
         mList.add(3, mCategory);
         mCategory = new ItemCategory(R.mipmap.ic_launcher, "Gas", "$ " + 50, 0);
         mList.add(4, mCategory);
+        mCategory = new ItemCategory(R.mipmap.ic_launcher, "Rent", "$ " + 30, 0);
+        mList.add(5, mCategory);
         return mList;
     }
 
@@ -65,10 +65,10 @@ public class CardListFragment extends TransitionHelper.BaseFragment{ // implemen
         rtvIncome = (RandomTextView) rootView.findViewById(R.id.rtv_income);
         rtvExpense = (RandomTextView) rootView.findViewById(R.id.rtv_expense);
         rtvIncome.setText("235");
-        rtvIncome.setPianyilian(digits);
+        rtvIncome.setPianyilian(RandomTextView.FIRSTF_FIRST);
         rtvIncome.start();
-        rtvExpense.setText("130");
-        rtvExpense.setPianyilian(digits);
+        rtvExpense.setText("160");
+        rtvExpense.setPianyilian(RandomTextView.FIRSTF_FIRST);
         rtvExpense.start();
         initRecyclerList();
         return rootView;

@@ -38,7 +38,7 @@ public class CardDetailFragment extends TransitionHelper.BaseFragment {
         rootView = inflater.inflate(R.layout.fragment_card_detail, container, false);
         initView();
 //        String itemText = getActivity().getIntent().getStringExtra("item_text");
-        String itemText = "FreeLancing";
+        String itemText = "Salary";
         tvTitle.setText(itemText);
 
         mScrollView.setOverScrollListener(new OverScrollView.OverScrollListener() {

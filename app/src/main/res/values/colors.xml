@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
+
 <!--<color name="colorPrimaryDark">#fe4c89</color>
     <color name="colorAccent">#FF4081</color>
-
     <color name="myPrimaryColor">#ff3e8b</color>-->
     <color name="white">#FFFFFF</color>
     <color name="almost_white">#EEEEEE</color>
@@ -13,7 +13,6 @@
 
     <color name="blue">#379aff</color>
     <color name="skyBlue">#5ac0ea</color>
-    <color name="skyBlue_light">#665ac0ea</color>
     <color name="skyBlue_pressed_light">#880793cc</color>
     <color name="lightRed">#f06679</color><!--暗深红色 -->
     <color name="startRed">#e43d61</color>
