@@ -31,8 +31,6 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
 
     //    private OnItemClickListener<T> onItemClickListener;
 
-
-
     @Override
     public RvCategoryAdapter<T>.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_cardview_item, parent, false);

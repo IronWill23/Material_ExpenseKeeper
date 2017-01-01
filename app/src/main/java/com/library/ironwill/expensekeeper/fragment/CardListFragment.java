@@ -38,7 +38,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment{ // implemen
     private RvCategoryAdapter mAdapter;
     private LinearLayoutManager linearLayoutManager;
     private ItemCategory mCategory;
-    private ArrayList<ItemCategory> mList;
+    private static ArrayList<ItemCategory> mList;
     private RandomTextView rtvIncome, rtvExpense;
     private ItemTouchHelper mItemTouchHelper;
 
@@ -205,7 +205,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment{ // implemen
                             0
                     ));
                     mAdapter = new RvCategoryAdapter();
-                    mAdapter.updateList(getList(),getActivity());
+                    mAdapter.updateList(mList,getActivity());
                     mRecyclerView.setAdapter(mAdapter);
                     mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     titleText.setText("");

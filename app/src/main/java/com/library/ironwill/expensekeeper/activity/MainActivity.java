@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,24 +92,22 @@ public class MainActivity extends TransitionHelper.BaseActivity {
 //                .withToolbar(mToolbar)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home),
-                        //here we use a customPrimaryDrawerItem we defined in our sample app
-                        //this custom DrawerItem extends the PrimaryDrawerItem so it just overwrites some methods
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withTextColor(getResources().getColor(R.color.almost_black)),
                         new OverflowMenuDrawerItem().withName(R.string.drawer_item_menu_drawer_item).withMenu(R.menu.fragment_menu).withOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
                                 Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
                                 return false;
                             }
-                        }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus),
-                        new CustomPrimaryDrawerItem().withName(R.string.drawer_item_manage).withIcon(FontAwesome.Icon.faw_amazon),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Try different skins").withIcon(FontAwesome.Icon.faw_eye),
+                        }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus).withTextColor(getResources().getColor(R.color.almost_black)),
+                        new CustomPrimaryDrawerItem().withName(R.string.drawer_item_manage).withIcon(FontAwesome.Icon.faw_amazon).withTextColor(getResources().getColor(R.color.almost_black)),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Try different skins").withIcon(FontAwesome.Icon.faw_eye).withTextColor(getResources().getColor(R.color.almost_black)),
 //                        new CustomUrlPrimaryDrawerItem().withName(R.string.drawer_item_fragment_drawer).withDescription(R.string.drawer_item_fragment_drawer_desc).withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460"),
                         new SectionDrawerItem().withName(R.string.drawer_item_section_header),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Bullhorn"),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(false)
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus).withTextColor(getResources().getColor(R.color.almost_black)),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withTextColor(getResources().getColor(R.color.almost_black)),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Bullhorn").withTextColor(getResources().getColor(R.color.almost_black)),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(true).withTextColor(getResources().getColor(R.color.almost_black))
                 ) // add the items we want to use with our Drawer
                 .withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
                     @Override

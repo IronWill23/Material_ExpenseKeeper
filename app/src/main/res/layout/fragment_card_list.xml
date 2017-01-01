@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@color/skyBlue_pressed_light"
+                android:background="@color/skyBlue_pressed_trans"
                 android:elevation="4dp"
                 android:gravity="bottom"
                 app:behavior_hideable="true"
@@ -155,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:text="Add New Expense Category:"
+                    android:text="New Expense Category:"
                     android:textSize="20sp" />
 
                 <EditText
@@ -193,7 +193,7 @@
                 android:clickable="true"
                 android:elevation="4dp"
                 android:src="@drawable/ic_add"
-                app:backgroundTint="@color/skyBlue_pressed_light"
+                app:backgroundTint="@color/skyBlue_pressed"
                 app:fabSize="normal"
                 app:layout_anchor="@+id/id_rl_bottomSheet"
                 app:layout_anchorGravity="right|top"
@@ -209,7 +209,7 @@
                 android:elevation="4dp"
                 android:src="@drawable/ic_done"
                 android:visibility="gone"
-                app:backgroundTint="@color/skyBlue_pressed_light"
+                app:backgroundTint="@color/skyBlue_pressed"
                 app:fabSize="normal"
                 app:layout_anchor="@+id/id_rl_bottomSheet"
                 app:layout_anchorGravity="right|top" />
