@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.MaterialMenuView;
+import com.jaeger.library.StatusBarUtil;
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.fragment.CardDetailFragment;
 import com.library.ironwill.expensekeeper.fragment.CardListFragment;
@@ -65,6 +66,7 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StatusBarUtil.setTransparent(this);
         initView();
         initToolbar();
         initDrawer(savedInstanceState);

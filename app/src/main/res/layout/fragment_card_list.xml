@@ -169,6 +169,7 @@
                     android:background="@drawable/edit_text_frame"
                     android:elevation="4dp"
                     android:hint="Category Name"
+                    android:inputType="text"
                     android:lines="1" />
 
                 <EditText
@@ -179,8 +180,9 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/edit_text_frame"
                     android:elevation="4dp"
+                    android:inputType="number"
                     android:gravity="top"
-                    android:hint="Expense number"
+                    android:hint="Expense Number"
                     android:lines="2" />
 
             </RelativeLayout>

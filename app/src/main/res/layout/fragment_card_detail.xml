@@ -5,54 +5,45 @@
     android:layout_height="match_parent"
     android:overScrollMode="never">
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/detail_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:background="@android:color/white"
+        android:foreground="?android:attr/selectableItemBackground"
+        card_view:cardCornerRadius="3dp"
+        card_view:cardElevation="2dp">
 
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/detail_layout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="1dp"
-            android:layout_marginTop="1dp"
-            android:background="@android:color/white"
-            android:foreground="?android:attr/selectableItemBackground"
-            card_view:cardCornerRadius="0dp"
-            card_view:cardElevation="2dp">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <LinearLayout
+
+            <TextView
+                android:id="@+id/detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:fontFamily="sans-serif-light"
+                android:text="Thing"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/detail_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Thing"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/detail_body"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:lineSpacingMultiplier="1.2"
-                    android:paddingTop="8dp"
-                    android:text="React Native is the next generation of React - a Javascript code library developed by Facebook and Instagram, which was released on Github in 2013. Native app creation means writing apps for a specific operating system. ©iStock/ React Native helps developers reuse code across the web and on mobile.
+            <TextView
+                android:id="@+id/detail_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:lineSpacingMultiplier="1.2"
+                android:paddingTop="8dp"
+                android:text="React Native is the next generation of React - a Javascript code library developed by Facebook and Instagram, which was released on Github in 2013. Native app creation means writing apps for a specific operating system. ©iStock/ React Native helps developers reuse code across the web and on mobile.
 \n\n
-Android and iOS have very different codebases and startups and businesses often struggle to hire - or afford- engineers for both. Now just one developer can write across different mobile operating systems."
+Android and iOS have very different codebases and startups and businesses often struggle to hire - or afford- engineers for both. Now just one developer can write across different mobile operating systems.
 
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-    </RelativeLayout>
+"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
 </com.library.ironwill.expensekeeper.view.OverScrollView.OverScrollView>

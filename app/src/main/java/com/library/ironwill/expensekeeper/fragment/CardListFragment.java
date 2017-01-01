@@ -32,7 +32,7 @@ import com.library.ironwill.expensekeeper.view.RandomTextView.RandomTextView;
 
 import java.util.ArrayList;
 
-public class CardListFragment extends TransitionHelper.BaseFragment{ // implements OnStartDragListener
+public class CardListFragment extends TransitionHelper.BaseFragment { // implements OnStartDragListener
 
     private IronRecyclerView mRecyclerView;
     private RvCategoryAdapter mAdapter;
@@ -48,7 +48,9 @@ public class CardListFragment extends TransitionHelper.BaseFragment{ // implemen
     private EditText titleText, contentText;
 
 
-    public CardListFragment() {}
+    public CardListFragment() {
+    }
+
     protected ArrayList<ItemCategory> getList() {
         mList = new ArrayList<>();
         mCategory = new ItemCategory(R.mipmap.ic_launcher, "Salary", "$ " + 235, 1);
@@ -99,7 +101,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment{ // implemen
         mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
 
         mAdapter = new RvCategoryAdapter();
-        mAdapter.updateList(getList(),getActivity());
+        mAdapter.updateList(getList(), getActivity());
         mRecyclerView.addOnItemTouchListener(new RecyclerViewClickListener(getActivity(), new RecyclerViewClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -135,7 +137,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment{ // implemen
             }
         });*/
         mRecyclerView.setAdapter(mAdapter);
-        IronItemAnimator mIronItemAnimator= new IronItemAnimator();
+        IronItemAnimator mIronItemAnimator = new IronItemAnimator();
         mIronItemAnimator.setAddDuration(1500);
         mIronItemAnimator.setRemoveDuration(700);
         mRecyclerView.setItemAnimator(mIronItemAnimator);
@@ -153,7 +155,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment{ // implemen
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
 
-                if (mBehavior.getState()==BottomSheetBehavior.STATE_DRAGGING){
+                if (mBehavior.getState() == BottomSheetBehavior.STATE_DRAGGING) {
                     mBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
                 if (mBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
@@ -200,12 +202,12 @@ public class CardListFragment extends TransitionHelper.BaseFragment{ // implemen
 
                     mList.add(new ItemCategory(
                             R.mipmap.ic_launcher,
-                            titleText.getText().toString(),
+                            "$ " + titleText.getText().toString(),
                             contentText.getText().toString(),
                             0
                     ));
                     mAdapter = new RvCategoryAdapter();
-                    mAdapter.updateList(mList,getActivity());
+                    mAdapter.updateList(mList, getActivity());
                     mRecyclerView.setAdapter(mAdapter);
                     mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     titleText.setText("");
