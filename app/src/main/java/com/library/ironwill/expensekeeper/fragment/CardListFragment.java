@@ -95,6 +95,13 @@ public class CardListFragment extends TransitionHelper.BaseFragment { // impleme
         return rootView;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        rtvExpense.destroy();
+        rtvIncome.destroy();
+    }
+
     private void initRecyclerList() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
@@ -222,7 +229,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment { // impleme
 
     @Override
     public boolean onBeforeBack() {
-        MainActivity activity = MainActivity.of(getActivity());
+//        MainActivity activity = MainActivity.of(getActivity());
        /* if (!activity.animateHomeIcon(MaterialMenuDrawable.IconState.BURGER)) {
             activity.mDrawer.openDrawer(GravityCompat.START);
         }*/

@@ -390,6 +390,11 @@ public class TransitionHelper {
         public void onBeforeReturn() {
 
         }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+        }
     }
 
 

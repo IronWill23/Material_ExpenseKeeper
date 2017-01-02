@@ -24,6 +24,13 @@ public class OverScrollView extends ScrollView {
     private int lastEventY;
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
+                MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, expandSpec);
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         final int eventY = (int) event.getY();
         switch (event.getAction()) {
@@ -43,11 +50,11 @@ public class OverScrollView extends ScrollView {
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (getScrollY() == 0) {
-                    handleOverscroll(event, false);
+                    handleOverScroll(event, false);
                 } else {
                     View view = getChildAt(getChildCount() - 1);
                     if (view.getHeight() <= (getHeight() + getScrollY())) {
-                        handleOverscroll(event, true);
+                        handleOverScroll(event, true);
                     }
                 }
                 break;
@@ -60,8 +67,8 @@ public class OverScrollView extends ScrollView {
 
     }
 
-    public static interface OverScrollListener {
-        public boolean onOverScroll(int yDistance, boolean isReleased);
+    public interface OverScrollListener {
+        boolean onOverScroll(int yDistance, boolean isReleased);
     }
 
     private OverScrollListener listener;
@@ -69,7 +76,7 @@ public class OverScrollView extends ScrollView {
         this.listener = listener;
     }
 
-    private void handleOverscroll(MotionEvent ev, boolean isBottom) {
+    private void handleOverScroll(MotionEvent ev, boolean isBottom) {
         int pointerCount = ev.getHistorySize();
         for (int p = 0; p < pointerCount; p++) {
             int historicalY = (int) ev.getHistoricalY(p);
