@@ -32,7 +32,7 @@ import com.library.ironwill.expensekeeper.view.RandomTextView.RandomTextView;
 
 import java.util.ArrayList;
 
-public class CardListFragment extends TransitionHelper.BaseFragment { // implements OnStartDragListener
+public class CardListFragment extends TransitionHelper.BaseFragment implements RvCategoryAdapter.OnRemoveItemListener{ // implements OnStartDragListener
 
     private IronRecyclerView mRecyclerView;
     private RvCategoryAdapter mAdapter;
@@ -46,6 +46,9 @@ public class CardListFragment extends TransitionHelper.BaseFragment { // impleme
     private BottomSheetBehavior mBehavior;
     private View mBottomSheet;
     private EditText titleText, contentText;
+
+    private int lastVisibleItem;
+    private int totalItemCount;
 
 
     public CardListFragment() {
@@ -103,6 +106,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment { // impleme
     }
 
     private void initRecyclerList() {
+        mRecyclerView.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
@@ -125,7 +129,6 @@ public class CardListFragment extends TransitionHelper.BaseFragment { // impleme
             public void onShow() {
                 addFABtn.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
             }
-
             @Override
             public void onHide() {
                 /*RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) addFABtn.getLayoutParams();
@@ -148,6 +151,16 @@ public class CardListFragment extends TransitionHelper.BaseFragment { // impleme
         mIronItemAnimator.setAddDuration(1500);
         mIronItemAnimator.setRemoveDuration(700);
         mRecyclerView.setItemAnimator(mIronItemAnimator);
+    }
+
+
+    @Override
+    public void onRemoveListener() {
+        lastVisibleItem = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+        totalItemCount = linearLayoutManager.getItemCount();
+        if (lastVisibleItem == totalItemCount - 1){
+            addFABtn.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
+        }
     }
 
     private void initFBtnAction() {
@@ -235,6 +248,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment { // impleme
         }*/
         return super.onBeforeBack();
     }
+
 
 
 /*    @Override

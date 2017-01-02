@@ -21,6 +21,7 @@ import java.util.List;
 /**
  * Comment and decouple the item listener and adapter
  * Solved the conflicts between the Item onTouch and onClick
+ *
  * @param <T>
  */
 
@@ -29,7 +30,15 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
     private SparseBooleanArray selectedItems;
     Activity mActivity;
 
-    //    private OnItemClickListener<T> onItemClickListener;
+    public interface OnRemoveItemListener {
+        void onRemoveListener();
+    }
+
+    private OnRemoveItemListener onRemoveItemListener;
+
+    public void setOnRemoveItemListener(OnRemoveItemListener onRemoveItemListener) {
+        this.onRemoveItemListener = onRemoveItemListener;
+    }
 
     @Override
     public RvCategoryAdapter<T>.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -66,8 +75,7 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
     public void toggleSelection(int pos) {
         if (selectedItems.get(pos, false)) {
             selectedItems.delete(pos);
-        }
-        else {
+        } else {
             selectedItems.put(pos, true);
         }
         notifyItemChanged(pos);
@@ -90,7 +98,9 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
         return items;
     }
 
-/*    public interface OnItemClickListener<T> {
+/*  private OnItemClickListener<T> onItemClickListener;
+
+    public interface OnItemClickListener<T> {
         void onItemClick(View view, T item, boolean isLongClick);
     }
 
@@ -102,6 +112,7 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
     public int getItemViewType(int position) {
         return 0;
     }
+
     //add data
     public void addItem(ArrayList<T> newData) {
         newData.addAll(items);
@@ -117,6 +128,7 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
         if (items.size() == 0) {
             Toast.makeText(mActivity, "No more Data", Toast.LENGTH_SHORT).show();
         }
+//        this.onRemoveItemListener.onRemoveListener();
     }
 
 

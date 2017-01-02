@@ -125,12 +125,12 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <com.library.ironwill.expensekeeper.view.IronRecyclerView.IronRecyclerView
             android:id="@+id/recycler_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
         <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
@@ -180,9 +180,9 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/edit_text_frame"
                     android:elevation="4dp"
-                    android:inputType="number"
                     android:gravity="top"
                     android:hint="Expense Number"
+                    android:inputType="number"
                     android:lines="2" />
 
             </RelativeLayout>
@@ -191,6 +191,7 @@
                 android:id="@+id/fab_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
                 android:layout_margin="15dp"
                 android:clickable="true"
                 android:elevation="4dp"
@@ -205,6 +206,7 @@
                 android:id="@+id/fab_done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
                 android:layout_marginBottom="15dp"
                 android:layout_marginRight="74dp"
                 android:clickable="true"

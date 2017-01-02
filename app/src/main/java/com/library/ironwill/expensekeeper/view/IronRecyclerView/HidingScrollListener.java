@@ -20,12 +20,16 @@ public abstract class HidingScrollListener extends RecyclerView.OnScrollListener
             onShow();
             controlsVisible = true;
             scrolledDistance = 0;
-
         }
 
         if ((controlsVisible && dy > 0) || (!controlsVisible && dy < 0)) {
             scrolledDistance += dy;
         }
+    }
+
+    @Override
+    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        super.onScrollStateChanged(recyclerView, newState);
     }
 
     public abstract void onHide();
