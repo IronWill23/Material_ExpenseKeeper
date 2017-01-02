@@ -11,14 +11,13 @@ Done:
 </br>2) Performance Enhanced (No memory leak, no GC triggered, APK size under 3MB, coldStart inside 1s, Smooth user experience).
 
 ToDo:
-</br>1) Using Nodejs StrongLoop build Restful Api.
+</br>1) Using Nodejs build Restful Api.
 </br>2) Setup the Disk/MemoryLruCache and MongoDB.
 </br>3) Immigrate the Native App to Hybrid by using ReactJs.
 </br>4) Customerize Icons and Action Listener.
 
 ### ScreenShots and Gif
-![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/expenseKeeper.gif)
-![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/expenseTracker.png)
+![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/ExpenseKeeper.gif)
 
 ## Authors
 
