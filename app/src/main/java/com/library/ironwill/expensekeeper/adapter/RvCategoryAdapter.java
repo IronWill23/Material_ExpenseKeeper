@@ -13,10 +13,12 @@ import android.widget.Toast;
 
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.model.ItemCategory;
+import com.library.ironwill.expensekeeper.view.IronRecyclerView.ItemTouchHelperAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Comment and decouple the item listener and adapter
@@ -25,10 +27,12 @@ import java.util.List;
  * @param <T>
  */
 
-public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter<T>.ViewHolder> {
+public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter<T>.ViewHolder>{
     private List<T> items = Collections.emptyList();
     private SparseBooleanArray selectedItems;
     Activity mActivity;
+
+    public static Stack<ItemCategory> tempStack;
 
     public interface OnRemoveItemListener {
         void onRemoveListener();
@@ -123,12 +127,13 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
 
     //remove data
     public void removeRecycle(int position) {
+        tempStack = new Stack<>();
+        tempStack.push((ItemCategory)items.get(position));
         items.remove(position);
         notifyDataSetChanged();
         if (items.size() == 0) {
             Toast.makeText(mActivity, "No more Data", Toast.LENGTH_SHORT).show();
         }
-//        this.onRemoveItemListener.onRemoveListener();
     }
 
 

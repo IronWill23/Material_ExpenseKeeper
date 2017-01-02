@@ -56,17 +56,17 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
 
     protected ArrayList<ItemCategory> getList() {
         mList = new ArrayList<>();
-        mCategory = new ItemCategory(R.mipmap.ic_launcher, "Salary", "$ " + 235, 1);
+        mCategory = new ItemCategory(R.drawable.salary, "Salary", "$ " + 235, 1);
         mList.add(0, mCategory);
-        mCategory = new ItemCategory(R.mipmap.ic_launcher, "Food", "$ " + 40, 0);
+        mCategory = new ItemCategory(R.drawable.food, "Food", "$ " + 40, 0);
         mList.add(1, mCategory);
-        mCategory = new ItemCategory(R.mipmap.ic_launcher, "Movie", "$ " + 30, 0);
+        mCategory = new ItemCategory(R.drawable.movie, "Movie", "$ " + 30, 0);
         mList.add(2, mCategory);
-        mCategory = new ItemCategory(R.mipmap.ic_launcher, "Gym", "$ " + 10, 0);
+        mCategory = new ItemCategory(R.drawable.gym, "Gym", "$ " + 10, 0);
         mList.add(3, mCategory);
-        mCategory = new ItemCategory(R.mipmap.ic_launcher, "Gas", "$ " + 50, 0);
+        mCategory = new ItemCategory(R.drawable.gas, "Gas", "$ " + 50, 0);
         mList.add(4, mCategory);
-        mCategory = new ItemCategory(R.mipmap.ic_launcher, "Rent", "$ " + 30, 0);
+        mCategory = new ItemCategory(R.drawable.rent, "Rent", "$ " + 30, 0);
         mList.add(5, mCategory);
         return mList;
     }
