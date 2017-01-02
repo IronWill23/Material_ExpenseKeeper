@@ -120,10 +120,11 @@ public class IronRecyclerView extends RecyclerView {
                 int scrollX = itemLayout.getScrollX();
                 if (scrollX > maxLength / 2) {
                     ((RvCategoryAdapter) getAdapter()).removeRecycle(pos);
+                    mScroller.startScroll(0, 0, 0, 0);
                 } else {
                     mScroller.startScroll(scrollX, 0, -scrollX, 0);
-                    invalidate();
                 }
+                invalidate();
                 isFirst = true;
                 break;
         }
