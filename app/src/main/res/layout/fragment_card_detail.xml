@@ -40,7 +40,7 @@
                 android:text="React Native is the next generation of React - a Javascript code library developed by Facebook and Instagram, which was released on Github in 2013. Native app creation means writing apps for a specific operating system. ©iStock/ React Native helps developers reuse code across the web and on mobile.
 \n\n
 Android and iOS have very different codebases and startups and businesses often struggle to hire - or afford- engineers for both. Now just one developer can write across different mobile operating systems.
-
+Android and iOS have very different codebases and startups and businesses often struggle to hire - or afford- engineers for both. Now just one developer can write across different mobile operating systems.
 "
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
         </LinearLayout>
