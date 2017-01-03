@@ -2,6 +2,18 @@
     <string name="app_name">expenseKeeper</string>
     <string name="income">INCOME:</string>
     <string name="expense">EXPENSE:</string>
+    <string name="app">ExpenseKeeper</string>
+    <string name="welcome">Welcome Back !</string>
+    <string name="subtitle">EK helps you Keep Track of daily Expense</string>
+    <string name="email">Email*</string>
+    <string name="password">Password*</string>
+    <string name="repeat_password">Repeat Password*</string>
+    <string name="login">Sign In</string>
+    <string name="register">Sign Up</string>
+    <string name="name">UserName</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forget_password">Forget password?</string>
+    <string name="social_media">Use your Social Network</string>
 
 
     <string-array name="monthList">

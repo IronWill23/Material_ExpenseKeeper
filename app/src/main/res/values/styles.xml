@@ -33,12 +33,33 @@
         <item name="android:colorBackground">@color/middleRed</item>
     </style>-->
 
-    <!--popup Animation-->
-    <style name="popup_anim_style">
-        <item name="android:windowEnterAnimation">@anim/popup_show</item>
-        <!-- 指定显示时的动画xml -->
-        <item name="android:windowExitAnimation">@anim/popup_hide</item>
-        <!-- 指定消失时的动画xml -->
+    <!--Material Login+Register-->
+    <style name="MaterialLoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+    <style name="MaterialLoginTheme.TextAppearanceLoginError" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/endRed</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="MaterialLoginTheme.TextAppearanceRegisterError" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/endRed</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="MaterialLoginTheme.TextAppearanceLogin">
+        <item name="android:textColor">@color/startRed</item>
+        <item name="colorControlNormal">@color/startRed</item>
+        <item name="android:textColorHint">@color/startRed</item>
+        <item name="colorControlActivated">@color/startRed</item>
+        <item name="colorControlHighlight">@color/startRed</item>
+    </style>
+
+    <style name="MaterialLoginTheme.TextAppearanceRegister">
+        <item name="android:textColor">@color/startRed</item>
+        <item name="colorControlNormal">@color/startRed</item>
+        <item name="android:textColorHint">@color/startRed</item>
+        <item name="colorControlActivated">@color/startRed</item>
+        <item name="colorControlHighlight">@color/startRed</item>
     </style>
 
 </resources>

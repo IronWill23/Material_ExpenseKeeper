@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.library.ironwill.expensekeeper.view.MaterialLoginView.DefaultRegisterView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:registerActionText="@string/register"
+    app:registerHint="@string/email"
+    app:registerIcon="@drawable/ic_register"
+    app:registerPasswordHint="@string/password"
+    app:registerRepeatPasswordHint="@string/repeat_password"
+    app:registerTextColor="@color/colorAccent" />

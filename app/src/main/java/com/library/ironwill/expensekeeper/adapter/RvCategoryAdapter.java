@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.model.ItemCategory;
-import com.library.ironwill.expensekeeper.view.IronRecyclerView.ItemTouchHelperAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;

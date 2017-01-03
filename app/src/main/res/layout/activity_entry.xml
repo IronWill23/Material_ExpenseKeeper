@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_container"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:background="@drawable/top_background">
+
+            <TextView
+                android:id="@+id/tv_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="@string/app"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/mid_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_centerInParent="true" />
+
+            <TextView
+                android:id="@+id/tv_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/mid_line"
+                android:layout_centerHorizontal="true"
+                android:text="@string/welcome"
+                android:layout_marginBottom="7dp"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_welcome"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-3dp"
+                android:text="@string/subtitle"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/almost_white" />
+    </LinearLayout>
+
+    <com.library.ironwill.expensekeeper.view.MaterialLoginView.MaterialLoginView
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="4dp"
+        app:loginView="@layout/custom_login_view"
+        app:registerIcon="@drawable/ic_register"
+        app:registerView="@layout/custom_register_view" />
+</FrameLayout>
+

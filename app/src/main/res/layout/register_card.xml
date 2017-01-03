@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <ImageView
+        android:id="@+id/register_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:src="@drawable/ic_cancel"
+        android:tint="@color/startRed" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/register_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/startRed"
+        android:textColorHint="@color/startRed"
+        app:errorTextAppearance="@style/MaterialLoginTheme.TextAppearanceRegisterError"
+        app:theme="@style/MaterialLoginTheme.TextAppearanceRegister">
+
+        <AutoCompleteTextView
+            android:id="@+id/register_user_autocomplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textSize="20sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/register_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        app:errorTextAppearance="@style/MaterialLoginTheme.TextAppearanceRegisterError"
+        app:theme="@style/MaterialLoginTheme.TextAppearanceRegister">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/register_pass_rep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        app:errorTextAppearance="@style/MaterialLoginTheme.TextAppearanceRegisterError"
+        app:theme="@style/MaterialLoginTheme.TextAppearanceRegister">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/repeat_password"
+            android:inputType="textPassword"
+            android:textSize="20sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/register_btn"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_background"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+</LinearLayout>
