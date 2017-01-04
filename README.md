@@ -22,6 +22,7 @@ ToDo:
 ## Authors
 
 * **Alex Liu** - *Initial work* - [IronWill23](https://github.com/IronWill23)
+@copyright Alex_Liu, lm20120729zwj@gmail.com
 
 ## License
 
