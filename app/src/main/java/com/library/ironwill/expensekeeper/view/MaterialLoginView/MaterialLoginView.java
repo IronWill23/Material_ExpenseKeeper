@@ -26,6 +26,7 @@ import android.widget.FrameLayout;
 
 import com.library.ironwill.expensekeeper.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 
@@ -35,6 +36,7 @@ public class MaterialLoginView extends FrameLayout {
     private static final String TAG = MaterialLoginView.class.getSimpleName();
 
     private FloatingActionButton registerFab;
+    private CircleImageView userImage;
     private View registerCancel;
     private ViewGroup loginCard;
     private ViewGroup registerCard;
@@ -62,11 +64,12 @@ public class MaterialLoginView extends FrameLayout {
 
     private void init(Context context, AttributeSet attrs) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.login_view, this, true);
+        inflater.inflate(R.layout.login_material_view, this, true);
 
         loginCard = (ViewGroup) findViewById(R.id.login_card);
         registerCard = (ViewGroup) findViewById(R.id.register_card);
         registerFab = (FloatingActionButton) findViewById(R.id.register_fab);
+        userImage = (CircleImageView) findViewById(R.id.user_circle_image);
 
         registerFab.setOnClickListener(new OnClickListener() {
             @Override
@@ -129,17 +132,18 @@ public class MaterialLoginView extends FrameLayout {
     }
 
     private void animateRegister() {
-        Path path = new Path();
+        Path pathFab = new Path();
+        Path pathCirImage = new Path();
         if (isRTL()) {
             RectF rect = new RectF(-41F, -40F, 241F, 242F);
-            path.addArc(rect, -135F, -180F);
-            path.lineTo(200F, -50F);
+            pathFab.addArc(rect, -135F, -180F);
+            pathFab.lineTo(200F, -50F);
         } else {
             RectF rect = new RectF(-241F, -40F, 41F, 242F);
-            path.addArc(rect, -45F, 180F);
-            path.lineTo(-0F, -50F);
+            pathFab.addArc(rect, -45F, 180F);
+            pathFab.lineTo(-0F, -50F);
         }
-        FabAnimation fabAnimation = new FabAnimation(path);
+        FabAnimation fabAnimation = new FabAnimation(pathFab);
         fabAnimation.setDuration(400);
         fabAnimation.setInterpolator(new AccelerateInterpolator());
 
@@ -163,6 +167,7 @@ public class MaterialLoginView extends FrameLayout {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                userImage.setVisibility(View.GONE);
                 registerFab.setVisibility(View.GONE);
             }
 
@@ -170,6 +175,11 @@ public class MaterialLoginView extends FrameLayout {
             public void onAnimationRepeat(Animation animation) {
             }
         });
+/*        pathCirImage.lineTo(1000F, 1000F);
+        FabAnimation cirImageAnimation = new FabAnimation(pathCirImage);
+        fabAnimation.setDuration(400);
+        fabAnimation.setInterpolator(new AccelerateInterpolator());
+        userImage.startAnimation(cirImageAnimation);*/
 
         registerFab.startAnimation(fabAnimation);
     }
@@ -201,6 +211,7 @@ public class MaterialLoginView extends FrameLayout {
                 registerCancel.setScaleY(1F);
                 registerCancel.setAlpha(1F);
                 registerCancel.setRotation(0F);
+                userImage.setVisibility(View.VISIBLE);
                 registerFab.setVisibility(View.VISIBLE);
 
                 ObjectAnimator animX = ObjectAnimator.ofFloat(registerFab, "scaleX", 0F, 1F);

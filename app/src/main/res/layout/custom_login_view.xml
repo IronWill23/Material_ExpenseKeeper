@@ -8,5 +8,6 @@
     app:loginActionText="@string/login"
     app:loginHint="@string/email"
     app:loginPasswordHint="@string/password"
-    app:loginTextColor="@color/white"
+    app:loginTextColor="@color/lightSlateGray"
+    app:loginRememberMe="true"
     />

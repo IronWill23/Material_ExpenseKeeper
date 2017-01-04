@@ -45,5 +45,5 @@ dependencies {
         transitive = true;
     }
     compile 'com.github.rey5137:material:1.2.4'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
 }

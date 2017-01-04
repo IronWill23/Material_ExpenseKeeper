@@ -72,11 +72,11 @@
         <attr name="registerView" format="reference" />
     </declare-styleable>
     <declare-styleable name="DefaultLoginView">
-        <attr name="loginTitle" format="string" />
         <attr name="loginHint" format="string" />
         <attr name="loginPasswordHint" format="string" />
         <attr name="loginActionText" format="string" />
         <attr name="loginTextColor" format="reference" />
+        <attr name="loginRememberMe" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="DefaultRegisterView">

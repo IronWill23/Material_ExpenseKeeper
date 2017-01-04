@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.library.ironwill.expensekeeper.R;
+import com.rey.material.widget.CheckBox;
 
 public class DefaultLoginView extends FrameLayout {
 
@@ -51,25 +52,21 @@ public class DefaultLoginView extends FrameLayout {
                 R.styleable.DefaultLoginView,
                 0, 0);
 
-//        TextView loginTitle = (TextView) findViewById(R.id.login_title);
         final TextInputLayout loginUser = (TextInputLayout) findViewById(R.id.login_user);
-        final TextInputLayout loginPass = (TextInputLayout) findViewById(R.id.login_pass);
+        final TextInputLayout loginPwd = (TextInputLayout) findViewById(R.id.login_pwd);
+        CheckBox mCheckBox = (CheckBox) findViewById(R.id.cb_remember);
         TextView loginBtn = (TextView) findViewById(R.id.login_btn);
 
         findViewById(R.id.login_btn).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onLogin(loginUser, loginPass);
+                    listener.onLogin(loginUser, loginPwd);
                 }
             }
         });
         try {
             String string;
-//            = a.getString(R.styleable.DefaultLoginView_loginTitle)
-            /*if (string != null) {
-                loginTitle.setText(string);
-            }*/
 
             string = a.getString(R.styleable.DefaultLoginView_loginHint);
             if (string != null) {
@@ -78,7 +75,7 @@ public class DefaultLoginView extends FrameLayout {
 
             string = a.getString(R.styleable.DefaultLoginView_loginPasswordHint);
             if (string != null) {
-                loginPass.setHint(string);
+                loginPwd.setHint(string);
             }
 
             string = a.getString(R.styleable.DefaultLoginView_loginActionText);
@@ -88,7 +85,10 @@ public class DefaultLoginView extends FrameLayout {
 
             int color = a.getColor(R.styleable.DefaultLoginView_loginTextColor, ContextCompat.getColor(getContext(), R.color.black));
             loginUser.getEditText().setTextColor(color);
-            loginPass.getEditText().setTextColor(color);
+            loginPwd.getEditText().setTextColor(color);
+
+            Boolean isChecked = a.getBoolean(R.styleable.DefaultLoginView_loginRememberMe, true);
+            mCheckBox.setSelected(isChecked);
 
         } finally {
             a.recycle();

@@ -26,7 +26,7 @@
     <color name="gray_cc">#cfcfcf</color><!--灰色cc -->
     <color name="gray_b1">#a5a5a5</color>
     <color name="gray_8f">#aa9f9f9f</color><!--灰色8f -->
-    <color name="gray">#9f9f9f</color><!--灰色8f -->
+    <color name="lightSlateGray">#778899</color><!--灰色8f -->
 
 
 </resources>

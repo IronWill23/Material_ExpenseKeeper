@@ -9,4 +9,4 @@
     app:registerIcon="@drawable/ic_register"
     app:registerPasswordHint="@string/password"
     app:registerRepeatPasswordHint="@string/repeat_password"
-    app:registerTextColor="@color/colorAccent" />
+    app:registerTextColor="@color/lightSlateGray" />

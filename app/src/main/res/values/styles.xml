@@ -62,4 +62,12 @@
         <item name="colorControlHighlight">@color/startRed</item>
     </style>
 
+    <style name="MaterialLoginTheme.SelectableItemTheme">
+        <item name="colorControlHighlight">@color/middleRed</item>
+    </style>
+    <style name="MaterialLoginTheme.SelectableItemBackground">
+        <item name="android:theme">@style/MaterialLoginTheme.SelectableItemTheme</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
 </resources>

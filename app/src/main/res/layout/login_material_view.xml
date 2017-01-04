@@ -33,6 +33,16 @@
             card_view:cardCornerRadius="10dp" />
     </io.codetail.widget.RevealFrameLayout>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_circle_image"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/profile3"
+        app:civ_border_width="4dp"
+        app:civ_border_color="@color/white"
+        app:layout_anchor="@id/login_window"
+        app:layout_anchorGravity="center|top" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/register_fab"
         android:layout_width="wrap_content"
