@@ -34,13 +34,14 @@ public class EntryActivity extends AppCompatActivity {
                 String pass = loginPass.getEditText().getText().toString();
 //                if (!pass.equals(user)) {
                 if (pass.isEmpty()) {
-                    loginPass.setError("Wrong password");
+                    loginPass.setError("Password can't be empty");
                     return;
                 }
                 loginPass.setError("");
                 Snackbar.make(login, "Login success!", Snackbar.LENGTH_SHORT).show();
                 Intent mIntent = new Intent(EntryActivity.this, MainActivity.class);
                 startActivity(mIntent);
+                EntryActivity.this.finish();
             }
         });
 

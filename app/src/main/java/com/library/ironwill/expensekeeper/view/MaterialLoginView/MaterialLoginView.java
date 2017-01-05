@@ -175,11 +175,13 @@ public class MaterialLoginView extends FrameLayout {
             public void onAnimationRepeat(Animation animation) {
             }
         });
-/*        pathCirImage.lineTo(1000F, 1000F);
-        FabAnimation cirImageAnimation = new FabAnimation(pathCirImage);
-        fabAnimation.setDuration(400);
-        fabAnimation.setInterpolator(new AccelerateInterpolator());
-        userImage.startAnimation(cirImageAnimation);*/
+        ObjectAnimator imgAlpha = ObjectAnimator.ofFloat(userImage, "alpha", 1F, 0F);
+        ObjectAnimator imgRotation = ObjectAnimator.ofFloat(userImage, "rotation", 0F, 360F);
+        AnimatorSet imgAnimator = new AnimatorSet();
+        imgAnimator.playTogether(imgAlpha, imgRotation);
+        imgAnimator.setInterpolator(new AccelerateInterpolator());
+        imgAnimator.setDuration(560);
+        imgAnimator.start();
 
         registerFab.startAnimation(fabAnimation);
     }
@@ -223,6 +225,15 @@ public class MaterialLoginView extends FrameLayout {
                 animator.setInterpolator(new AccelerateInterpolator());
                 animator.setDuration(200);
                 animator.start();
+
+                ObjectAnimator animImgX = ObjectAnimator.ofFloat(userImage, "scaleX", 0F, 1F);
+                ObjectAnimator animImgY = ObjectAnimator.ofFloat(userImage, "scaleY", 0F, 1F);
+                ObjectAnimator imgAlpha = ObjectAnimator.ofFloat(userImage, "alpha", 0F, 1F);
+                AnimatorSet imgAnimator = new AnimatorSet();
+                imgAnimator.playTogether(animImgX, animImgY, imgAlpha);
+                imgAnimator.setInterpolator(new AccelerateInterpolator());
+                imgAnimator.setDuration(560);
+                imgAnimator.start();
             }
         });
         animator.start();
