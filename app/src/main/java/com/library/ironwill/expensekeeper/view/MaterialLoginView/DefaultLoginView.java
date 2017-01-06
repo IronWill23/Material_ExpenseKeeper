@@ -13,7 +13,11 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.library.ironwill.expensekeeper.R;
+import com.library.ironwill.expensekeeper.activity.EntryActivity;
+import com.library.ironwill.expensekeeper.activity.MainActivity;
 import com.rey.material.widget.CheckBox;
+
+import immortalz.me.library.TransitionsHeleper;
 
 public class DefaultLoginView extends FrameLayout {
 

@@ -133,7 +133,6 @@ public class MaterialLoginView extends FrameLayout {
 
     private void animateRegister() {
         Path pathFab = new Path();
-        Path pathCirImage = new Path();
         if (isRTL()) {
             RectF rect = new RectF(-41F, -40F, 241F, 242F);
             pathFab.addArc(rect, -135F, -180F);

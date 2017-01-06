@@ -1,15 +1,22 @@
 package com.library.ironwill.expensekeeper.activity;
 
-import android.content.Intent;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.ImageView;
 
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.view.MaterialLoginView.DefaultLoginView;
 import com.library.ironwill.expensekeeper.view.MaterialLoginView.DefaultRegisterView;
 import com.library.ironwill.expensekeeper.view.MaterialLoginView.MaterialLoginView;
+
+import immortalz.me.library.TransitionsHeleper;
+import immortalz.me.library.bean.InfoBean;
+import immortalz.me.library.method.ColorShowMethod;
 
 public class EntryActivity extends AppCompatActivity {
 
@@ -17,9 +24,31 @@ public class EntryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        TransitionsHeleper.getInstance()
+                .setShowMethod(new ColorShowMethod(R.color.white,R.color.endRed) {
+                    @Override
+                    public void loadCopyView(InfoBean bean, ImageView copyView) {
+                        AnimatorSet set = new AnimatorSet();
+                        set.playTogether(
+                                ObjectAnimator.ofFloat(copyView,"rotation",0,180),
+                                ObjectAnimator.ofFloat(copyView, "scaleX", 1, 0),
+                                ObjectAnimator.ofFloat(copyView, "scaleY", 1, 0)
+                        );
+                        set.setInterpolator(new AccelerateInterpolator());
+                        set.setDuration(duration / 4 * 5).start();
+                    }
+
+                    @Override
+                    public void loadTargetView(InfoBean bean, ImageView targetView) {
+
+                    }
+
+
+                })
+                .show(this,null);
         setContentView(R.layout.activity_entry);
 
-        final MaterialLoginView login = (MaterialLoginView) findViewById(R.id.login);
+        final MaterialLoginView login = (MaterialLoginView) findViewById(R.id.login_entry);
         ((DefaultLoginView) login.getLoginView()).setListener(new DefaultLoginView.DefaultLoginViewListener() {
 
             @Override
@@ -39,9 +68,7 @@ public class EntryActivity extends AppCompatActivity {
                 }
                 loginPass.setError("");
                 Snackbar.make(login, "Login success!", Snackbar.LENGTH_SHORT).show();
-                Intent mIntent = new Intent(EntryActivity.this, MainActivity.class);
-                startActivity(mIntent);
-                EntryActivity.this.finish();
+                TransitionsHeleper.startActivity(EntryActivity.this, MainActivity.class, login.getLoginView());
             }
         });
 
@@ -70,6 +97,7 @@ public class EntryActivity extends AppCompatActivity {
                 registerPassRep.setError("");
 
                 Snackbar.make(login, "Register success!", Snackbar.LENGTH_SHORT).show();
+                TransitionsHeleper.startActivity(EntryActivity.this, EntryActivity.class, login.getRegisterView());
             }
         });
     }

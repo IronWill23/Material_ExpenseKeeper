@@ -1,5 +1,7 @@
 package com.library.ironwill.expensekeeper.activity;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -9,6 +11,8 @@ import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +43,10 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import immortalz.me.library.TransitionsHeleper;
+import immortalz.me.library.bean.InfoBean;
+import immortalz.me.library.method.ColorShowMethod;
+
 public class MainActivity extends TransitionHelper.BaseActivity {
 
     protected static String BASE_FRAGMENT = "base_fragment";
@@ -65,6 +73,28 @@ public class MainActivity extends TransitionHelper.BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        TransitionsHeleper.getInstance()
+                .setShowMethod(new ColorShowMethod(R.color.white,R.color.endRed) {
+                    @Override
+                    public void loadCopyView(InfoBean bean, ImageView copyView) {
+                        AnimatorSet set = new AnimatorSet();
+                        set.playTogether(
+                                ObjectAnimator.ofFloat(copyView,"rotation",0,180),
+                                ObjectAnimator.ofFloat(copyView, "scaleX", 1, 0),
+                                ObjectAnimator.ofFloat(copyView, "scaleY", 1, 0)
+                        );
+                        set.setInterpolator(new AccelerateInterpolator());
+                        set.setDuration(duration / 4 * 5).start();
+                    }
+
+                    @Override
+                    public void loadTargetView(InfoBean bean, ImageView targetView) {
+
+                    }
+
+
+                })
+                .show(this,null);
         setContentView(R.layout.activity_main);
         StatusBarUtil.setTransparent(this);
         initView();
