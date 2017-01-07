@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">expenseKeeper</string>
+    <string name="app_name">ExpenseKeeper</string>
     <string name="income">INCOME:</string>
     <string name="expense">EXPENSE:</string>
     <string name="app">ExpenseKeeper</string>

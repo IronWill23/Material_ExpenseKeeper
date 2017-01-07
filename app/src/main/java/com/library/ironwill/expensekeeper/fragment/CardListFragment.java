@@ -1,5 +1,6 @@
 package com.library.ironwill.expensekeeper.fragment;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -179,6 +180,12 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
                 }
                 if (mBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                     doneFABtn.setVisibility(View.VISIBLE);
+                    ObjectAnimator animatorX = ObjectAnimator.ofFloat(doneFABtn, "scaleX", 1f, 1.2f, 1f);
+                    ObjectAnimator animatorY = ObjectAnimator.ofFloat(doneFABtn, "scaleY", 1f, 1.2f, 1f);
+                    AnimatorSet animSet = new AnimatorSet();
+                    animSet.play(animatorX).with(animatorY);
+                    animSet.setDuration(800);
+                    animSet.start();
                 } else {
                     doneFABtn.setVisibility(View.GONE);
                 }

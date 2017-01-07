@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@color/skyBlue_pressed_trans"
+                android:background="@drawable/bs_background"
                 android:elevation="4dp"
                 android:gravity="bottom"
                 app:behavior_hideable="true"
@@ -191,31 +191,29 @@
                 android:id="@+id/fab_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
                 android:layout_margin="15dp"
                 android:clickable="true"
                 android:elevation="4dp"
                 android:src="@drawable/ic_add"
-                app:backgroundTint="@color/skyBlue_pressed"
+                app:backgroundTint="@color/middleBlue"
                 app:fabSize="normal"
                 app:layout_anchor="@+id/id_rl_bottomSheet"
-                app:layout_anchorGravity="right|top" />
+                app:layout_anchorGravity="top|end" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
                 android:layout_marginBottom="15dp"
                 android:layout_marginRight="74dp"
                 android:clickable="true"
                 android:elevation="4dp"
                 android:src="@drawable/ic_done"
                 android:visibility="gone"
-                app:backgroundTint="@color/skyBlue_pressed"
+                app:backgroundTint="@color/middleBlue"
                 app:fabSize="normal"
                 app:layout_anchor="@+id/id_rl_bottomSheet"
-                app:layout_anchorGravity="right|top" />
+                app:layout_anchorGravity="top|end" />
         </android.support.design.widget.CoordinatorLayout>
     </FrameLayout>
 
