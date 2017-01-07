@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +39,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
     private ItemCategory mCategory;
     private static ArrayList<ItemCategory> mList;
     private RandomTextView rtvIncome, rtvExpense;
-    private ItemTouchHelper mItemTouchHelper;
+//    private ItemTouchHelper mItemTouchHelper;
 
     public FloatingActionButton addFABtn, doneFABtn;
     private BottomSheetBehavior mBehavior;

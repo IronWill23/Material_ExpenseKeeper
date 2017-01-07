@@ -199,8 +199,7 @@
                 app:backgroundTint="@color/skyBlue_pressed"
                 app:fabSize="normal"
                 app:layout_anchor="@+id/id_rl_bottomSheet"
-                app:layout_anchorGravity="right|top"
-                app:layout_behavior="com.library.ironwill.expensekeeper.behavior.FABonScrollBehavior" />
+                app:layout_anchorGravity="right|top" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_done"

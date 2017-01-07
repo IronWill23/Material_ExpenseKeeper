@@ -69,6 +69,7 @@ public class EntryActivity extends AppCompatActivity {
                 loginPass.setError("");
                 Snackbar.make(login, "Login success!", Snackbar.LENGTH_SHORT).show();
                 TransitionsHeleper.startActivity(EntryActivity.this, MainActivity.class, login.getLoginView());
+                EntryActivity.this.finish();
             }
         });
 

@@ -65,11 +65,14 @@
 
     <ImageView
         android:id="@+id/iv_delete"
-        android:layout_width="68dp"
+        android:layout_width="65dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="@color/middleRed"
-        android:padding="10dp"
-        android:src="@drawable/ic_delete_forever" />
+        android:paddingTop="17dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:src="@drawable/ic_delete" />
 
 </LinearLayout>

@@ -100,8 +100,8 @@ public class IronRecyclerView extends RecyclerView {
                     if (scrollX > maxLength / 2) {
                         imageView.setVisibility(VISIBLE);
                         if (isFirst) {
-                            ObjectAnimator animatorX = ObjectAnimator.ofFloat(imageView, "scaleX", 1f, 1.2f, 1f);
-                            ObjectAnimator animatorY = ObjectAnimator.ofFloat(imageView, "scaleY", 1f, 1.2f, 1f);
+                            ObjectAnimator animatorX = ObjectAnimator.ofFloat(imageView, "scaleX", 1f, 1.4f, 1f);
+                            ObjectAnimator animatorY = ObjectAnimator.ofFloat(imageView, "scaleY", 1f, 1.4f, 1f);
                             AnimatorSet animSet = new AnimatorSet();
                             animSet.play(animatorX).with(animatorY);
                             animSet.setDuration(800);

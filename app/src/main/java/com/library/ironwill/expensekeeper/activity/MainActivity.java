@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -63,6 +64,8 @@ public class MainActivity extends TransitionHelper.BaseActivity {
     private AccountHeader headerResult = null;
     private static final int PROFILE_SETTING = 1;
     private Drawer drawer = null;
+
+    private long exitTime = 0;
 
     private static final String[] dateList = {
             "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
@@ -288,5 +291,26 @@ public class MainActivity extends TransitionHelper.BaseActivity {
 
     public static MainActivity of(Activity activity) {
         return (MainActivity) activity;
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+                this.exitApp();
+            }
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+    private void exitApp() {
+        // 判断2次点击事件时间
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(MainActivity.this, "Press Back again to exit", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 }
