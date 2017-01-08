@@ -14,6 +14,7 @@
     <string name="remember_me">Remember me</string>
     <string name="forget_password">Forget password?</string>
     <string name="social_media">Use your Social Network</string>
+    <string name="copyright">/@copyright: author by Alex_Liu</string>
 
 
     <string-array name="monthList">

@@ -6,7 +6,7 @@
         <!--<item name="colorPrimary">@color/colorPrimary</item>-->
         <item name="colorPrimary">@color/middleRed</item>
         <item name="colorPrimaryDark">@color/endRed</item>
-        <item name="colorAccent">@color/middleRed</item>
+        <item name="colorAccent">@color/endRed_1</item>
     </style>
 
     <style name="AppTheme.Launcher">
@@ -71,6 +71,7 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
+    <!--Windows Animation-->
     <style name="WindowAnimFadeInOut">
         <item name="android:windowEnterAnimation">@anim/fade_in</item>
         <item name="android:windowExitAnimation">@anim/fade_out</item>

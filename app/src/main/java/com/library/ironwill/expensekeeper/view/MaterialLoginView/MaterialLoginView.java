@@ -225,13 +225,13 @@ public class MaterialLoginView extends FrameLayout {
                 animator.setDuration(200);
                 animator.start();
 
-                ObjectAnimator animImgX = ObjectAnimator.ofFloat(userImage, "scaleX", 0F, 1F);
-                ObjectAnimator animImgY = ObjectAnimator.ofFloat(userImage, "scaleY", 0F, 1F);
+                ObjectAnimator animImgX = ObjectAnimator.ofFloat(userImage, "scaleX", 0F, 1.3F, 1F);
+                ObjectAnimator animImgY = ObjectAnimator.ofFloat(userImage, "scaleY", 0F, 1.3F, 1F);
                 ObjectAnimator imgAlpha = ObjectAnimator.ofFloat(userImage, "alpha", 0F, 1F);
                 AnimatorSet imgAnimator = new AnimatorSet();
                 imgAnimator.playTogether(animImgX, animImgY, imgAlpha);
                 imgAnimator.setInterpolator(new AccelerateInterpolator());
-                imgAnimator.setDuration(560);
+                imgAnimator.setDuration(500);
                 imgAnimator.start();
             }
         });

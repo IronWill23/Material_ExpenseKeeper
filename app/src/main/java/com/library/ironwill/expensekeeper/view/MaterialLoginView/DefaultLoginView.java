@@ -13,11 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.library.ironwill.expensekeeper.R;
-import com.library.ironwill.expensekeeper.activity.EntryActivity;
-import com.library.ironwill.expensekeeper.activity.MainActivity;
 import com.rey.material.widget.CheckBox;
-
-import immortalz.me.library.TransitionsHeleper;
 
 public class DefaultLoginView extends FrameLayout {
 
@@ -92,7 +88,7 @@ public class DefaultLoginView extends FrameLayout {
             loginPwd.getEditText().setTextColor(color);
 
             Boolean isChecked = a.getBoolean(R.styleable.DefaultLoginView_loginRememberMe, true);
-            mCheckBox.setSelected(isChecked);
+            mCheckBox.setChecked(isChecked);
 
         } finally {
             a.recycle();

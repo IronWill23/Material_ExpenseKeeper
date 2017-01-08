@@ -37,9 +37,9 @@
         android:id="@+id/user_circle_image"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/profile3"
-        app:civ_border_width="4dp"
+        android:src="@drawable/profile4"
         app:civ_border_color="@color/white"
+        app:civ_border_width="4dp"
         app:layout_anchor="@id/login_window"
         app:layout_anchorGravity="center|top" />
 
