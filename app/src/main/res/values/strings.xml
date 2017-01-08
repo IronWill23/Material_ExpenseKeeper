@@ -33,7 +33,7 @@
 
     <string name="drawer_item_home">Home</string>
     <string name="drawer_item_manage">Manage Money</string>
-    <string name="drawer_item_custom">Customize</string>
+    <string name="drawer_item_custom">Night Mode</string>
     <string name="drawer_item_section_header">Section Header</string>
     <string name="drawer_item_settings">Settings</string>
     <string name="drawer_item_help">Help</string>

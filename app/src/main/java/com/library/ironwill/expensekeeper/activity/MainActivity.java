@@ -40,7 +40,6 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
@@ -66,6 +65,7 @@ public class MainActivity extends TransitionHelper.BaseActivity {
     private Drawer drawer = null;
 
     private long exitTime = 0;
+    private static Boolean isFirstLogin = true;
 
     private static final String[] dateList = {
             "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
@@ -76,28 +76,29 @@ public class MainActivity extends TransitionHelper.BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        TransitionsHeleper.getInstance()
-                .setShowMethod(new ColorShowMethod(R.color.white,R.color.endRed) {
-                    @Override
-                    public void loadCopyView(InfoBean bean, ImageView copyView) {
-                        AnimatorSet set = new AnimatorSet();
-                        set.playTogether(
-                                ObjectAnimator.ofFloat(copyView,"rotation",0,180),
-                                ObjectAnimator.ofFloat(copyView, "scaleX", 1, 0),
-                                ObjectAnimator.ofFloat(copyView, "scaleY", 1, 0)
-                        );
-                        set.setInterpolator(new AccelerateInterpolator());
-                        set.setDuration(duration / 4 * 5).start();
-                    }
+        if (isFirstLogin) {
+            TransitionsHeleper.getInstance()
+                    .setShowMethod(new ColorShowMethod(R.color.white, R.color.endRed) {
+                        @Override
+                        public void loadCopyView(InfoBean bean, ImageView copyView) {
+                            AnimatorSet set = new AnimatorSet();
+                            set.playTogether(
+                                    ObjectAnimator.ofFloat(copyView, "rotation", 0, 180),
+                                    ObjectAnimator.ofFloat(copyView, "scaleX", 1, 0),
+                                    ObjectAnimator.ofFloat(copyView, "scaleY", 1, 0)
+                            );
+                            set.setInterpolator(new AccelerateInterpolator());
+                            set.setDuration(duration / 4 * 5).start();
+                        }
 
-                    @Override
-                    public void loadTargetView(InfoBean bean, ImageView targetView) {
+                        @Override
+                        public void loadTargetView(InfoBean bean, ImageView targetView) {
 
-                    }
-
-
-                })
-                .show(this,null);
+                        }
+                    })
+                    .show(this, null);
+            isFirstLogin = false;
+        }
         setContentView(R.layout.activity_main);
         StatusBarUtil.setTransparent(this);
         initView();
@@ -136,9 +137,9 @@ public class MainActivity extends TransitionHelper.BaseActivity {
                             }
                         }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus).withTextColor(getResources().getColor(R.color.almost_black)),
                         new CustomPrimaryDrawerItem().withName(R.string.drawer_item_manage).withIcon(FontAwesome.Icon.faw_amazon).withTextColor(getResources().getColor(R.color.almost_black)),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withDescription("Try different skins").withIcon(FontAwesome.Icon.faw_eye).withTextColor(getResources().getColor(R.color.almost_black)),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withIcon(FontAwesome.Icon.faw_eye).withTextColor(getResources().getColor(R.color.almost_black)),
 //                        new CustomUrlPrimaryDrawerItem().withName(R.string.drawer_item_fragment_drawer).withDescription(R.string.drawer_item_fragment_drawer_desc).withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460"),
-                        new SectionDrawerItem().withName(R.string.drawer_item_section_header),
+//                        new SectionDrawerItem().withName(R.string.drawer_item_section_header),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus).withTextColor(getResources().getColor(R.color.almost_black)),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withTextColor(getResources().getColor(R.color.almost_black)),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Bullhorn").withTextColor(getResources().getColor(R.color.almost_black)),
@@ -212,11 +213,11 @@ public class MainActivity extends TransitionHelper.BaseActivity {
             @Override
             public void onClick(View view) {
                 if (!drawer.isDrawerOpen()) {
-                    if (homeButton.getState() == MaterialMenuDrawable.IconState.BURGER){
+                    if (homeButton.getState() == MaterialMenuDrawable.IconState.BURGER) {
                         drawer.openDrawer();
-                    }else if (homeButton.getState() == MaterialMenuDrawable.IconState.X){
+                    } else if (homeButton.getState() == MaterialMenuDrawable.IconState.X) {
                         homeButton.animateState(MaterialMenuDrawable.IconState.BURGER);
-                    }else if (homeButton.getState() == MaterialMenuDrawable.IconState.ARROW){
+                    } else if (homeButton.getState() == MaterialMenuDrawable.IconState.ARROW) {
                         onBackPressed();
                     }
                 } else {

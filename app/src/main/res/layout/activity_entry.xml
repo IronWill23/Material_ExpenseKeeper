@@ -21,7 +21,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:text="@string/app"
-                android:textColor="@color/white"
+                android:shadowColor="@color/endRed"
+                android:shadowDx="5"
+                android:shadowDy="5"
+                android:shadowRadius="3"
+                android:textColor="@color/metalWhite"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 

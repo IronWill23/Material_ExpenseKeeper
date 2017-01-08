@@ -176,6 +176,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
 
                 if (mBehavior.getState() == BottomSheetBehavior.STATE_DRAGGING) {
+                    doneFABtn.setVisibility(View.VISIBLE);
                     mBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
                 if (mBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
@@ -184,7 +185,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
                     ObjectAnimator animatorY = ObjectAnimator.ofFloat(doneFABtn, "scaleY", 1f, 1.2f, 1f);
                     AnimatorSet animSet = new AnimatorSet();
                     animSet.play(animatorX).with(animatorY);
-                    animSet.setDuration(800);
+                    animSet.setDuration(700);
                     animSet.start();
                 } else {
                     doneFABtn.setVisibility(View.GONE);

@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.transition.Transition;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -287,7 +287,7 @@ public class TransitionHelper {
         }
     }
 
-    public static class BaseActivity extends ActionBarActivity implements TransitionHelper.Source, TransitionHelper.Listener {
+    public static class BaseActivity extends AppCompatActivity implements TransitionHelper.Source, TransitionHelper.Listener {
         TransitionHelper transitionHelper;
 
         @Override
