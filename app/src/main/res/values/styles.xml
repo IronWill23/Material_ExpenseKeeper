@@ -71,4 +71,8 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
+    <style name="WindowAnimFadeInOut">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
 </resources>

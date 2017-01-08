@@ -5,9 +5,12 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.PopupMenu;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -67,6 +70,7 @@ public class MainActivity extends TransitionHelper.BaseActivity {
 
     private long exitTime = 0;
     private static Boolean isFirstLogin = true;
+    private CardListFragment cardListFragment = null;
 
     private static final String[] dateList = {
             "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
@@ -77,6 +81,11 @@ public class MainActivity extends TransitionHelper.BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            cardListFragment = (CardListFragment) getFragmentManager().getFragment(savedInstanceState, "ListFragment");
+        } else {
+            cardListFragment = new CardListFragment();
+        }
         if (isFirstLogin) {
             TransitionsHeleper.getInstance()
                     .setShowMethod(new ColorShowMethod(R.color.white, R.color.endRed) {
@@ -141,6 +150,14 @@ public class MainActivity extends TransitionHelper.BaseActivity {
                         new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withIcon(FontAwesome.Icon.faw_eye).withTextColor(getResources().getColor(R.color.almost_black)).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                             @Override
                             public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                                int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                                if(mode == Configuration.UI_MODE_NIGHT_YES) {
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                                } else if(mode == Configuration.UI_MODE_NIGHT_NO) {
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                                }
+                                getWindow().setWindowAnimations(R.style.WindowAnimFadeInOut);
+                                recreate();
                                 return true;
                             }
                         }),
