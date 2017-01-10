@@ -23,12 +23,12 @@ public class OverScrollView extends ScrollView {
 
     private int lastEventY;
 
-    @Override
+/*    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
                 MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, expandSpec);
-    }
+    }*/
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

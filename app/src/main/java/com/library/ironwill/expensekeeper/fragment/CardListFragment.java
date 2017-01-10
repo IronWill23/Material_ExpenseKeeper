@@ -181,8 +181,8 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
                 }
                 if (mBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                     doneFABtn.setVisibility(View.VISIBLE);
-                    ObjectAnimator animatorX = ObjectAnimator.ofFloat(doneFABtn, "scaleX", 1f, 1.2f, 1f);
-                    ObjectAnimator animatorY = ObjectAnimator.ofFloat(doneFABtn, "scaleY", 1f, 1.2f, 1f);
+                    ObjectAnimator animatorX = ObjectAnimator.ofFloat(doneFABtn, "scaleX", 1f, 1.14f, 1f);
+                    ObjectAnimator animatorY = ObjectAnimator.ofFloat(doneFABtn, "scaleY", 1f, 1.14f, 1f);
                     AnimatorSet animSet = new AnimatorSet();
                     animSet.play(animatorX).with(animatorY);
                     animSet.setDuration(700);
