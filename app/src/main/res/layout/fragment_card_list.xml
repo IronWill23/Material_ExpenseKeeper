@@ -145,7 +145,7 @@
                 android:background="@drawable/bs_background"
                 android:elevation="4dp"
                 android:gravity="bottom"
-                app:behavior_hideable="true"
+                app:behavior_hideable="false"
                 app:behavior_peekHeight="0dp"
                 app:layout_behavior="@string/bottom_sheet_behavior">
 

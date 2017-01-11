@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,7 @@ import com.library.ironwill.expensekeeper.helper.TransitionHelper;
 import com.library.ironwill.expensekeeper.model.ItemCategory;
 import com.library.ironwill.expensekeeper.util.Navigator;
 import com.library.ironwill.expensekeeper.view.ExplosionView.ExplosionField;
+import com.library.ironwill.expensekeeper.view.IronRecyclerView.CustomLinearLayoutManager;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.HidingScrollListener;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.IronItemAnimator;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.IronRecyclerView;
@@ -36,7 +36,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
 
     private IronRecyclerView mRecyclerView;
     private RvCategoryAdapter mAdapter;
-    private LinearLayoutManager linearLayoutManager;
+    private CustomLinearLayoutManager cLinearLayoutManager;
     private ItemCategory mCategory;
     private static ArrayList<ItemCategory> mList;
     private RandomTextView rtvIncome, rtvExpense;
@@ -107,8 +107,8 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
 
     private void initRecyclerList() {
         mRecyclerView.setHasFixedSize(true);
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+        cLinearLayoutManager = new CustomLinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(cLinearLayoutManager);
         mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
 
         mAdapter = new RvCategoryAdapter();
@@ -156,8 +156,8 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
 
     @Override
     public void onRemoveListener() {
-        lastVisibleItem = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-        totalItemCount = linearLayoutManager.getItemCount();
+        lastVisibleItem = cLinearLayoutManager.findLastCompletelyVisibleItemPosition();
+        totalItemCount = cLinearLayoutManager.getItemCount();
         if (lastVisibleItem == totalItemCount - 1){
             addFABtn.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
         }
@@ -176,7 +176,6 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
 
                 if (mBehavior.getState() == BottomSheetBehavior.STATE_DRAGGING) {
-                    doneFABtn.setVisibility(View.VISIBLE);
                     mBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
                 if (mBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
@@ -187,8 +186,18 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
                     animSet.play(animatorX).with(animatorY);
                     animSet.setDuration(700);
                     animSet.start();
-                } else {
+                    cLinearLayoutManager.setScrollEnabled(false);
+                    mRecyclerView.setLayoutManager(cLinearLayoutManager);
+                } else if (mBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED){
                     doneFABtn.setVisibility(View.GONE);
+                    ObjectAnimator animatorX = ObjectAnimator.ofFloat(doneFABtn, "scaleX", 1f, 0f);
+                    ObjectAnimator animatorY = ObjectAnimator.ofFloat(doneFABtn, "scaleY", 1f, 0f);
+                    AnimatorSet animSet = new AnimatorSet();
+                    animSet.playTogether(animatorX, animatorY);
+                    animSet.setDuration(700);
+                    animSet.start();
+                    cLinearLayoutManager.setScrollEnabled(true);
+                    mRecyclerView.setLayoutManager(cLinearLayoutManager);
                 }
             }
 
