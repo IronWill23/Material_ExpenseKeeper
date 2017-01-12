@@ -5,10 +5,11 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -175,16 +176,16 @@ public class MainActivity extends TransitionHelper.BaseActivity {
 //                .withToolbar(mToolbar)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withTextColor(getResources().getColor(R.color.almost_black)),
-                        new OverflowMenuDrawerItem().withName(R.string.drawer_item_menu_drawer_item).withMenu(R.menu.fragment_menu).withOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withTextColor(getResources().getColor(R.color.almost_black)).withSelectedColor(getResources().getColor(R.color.middleBlue)),
+                        new OverflowMenuDrawerItem().withName(R.string.drawer_item_menu_drawer_item).withMenu(R.menu.fragment_menu).withSelectedColor(getResources().getColor(R.color.middleBlue)).withOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
                                 Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
                                 return false;
                             }
-                        }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus).withTextColor(getResources().getColor(R.color.almost_black)),
-                        new CustomPrimaryDrawerItem().withName(R.string.drawer_item_manage).withIcon(FontAwesome.Icon.faw_amazon).withTextColor(getResources().getColor(R.color.almost_black)),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withIcon(FontAwesome.Icon.faw_eye).withTextColor(getResources().getColor(R.color.almost_black)).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                        }).withIcon(GoogleMaterial.Icon.gmd_filter_center_focus).withTextColor(getResources().getColor(R.color.almost_black)).withSelectedColor(getResources().getColor(R.color.middleBlue)),
+                        new CustomPrimaryDrawerItem().withName(R.string.drawer_item_manage).withIcon(FontAwesome.Icon.faw_amazon).withTextColor(getResources().getColor(R.color.almost_black)).withSelectedColor(getResources().getColor(R.color.middleBlue)),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withIcon(FontAwesome.Icon.faw_eye).withTextColor(getResources().getColor(R.color.almost_black)).withSelectedColor(getResources().getColor(R.color.middleBlue)).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                             @Override
                             public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                                 int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
@@ -200,11 +201,19 @@ public class MainActivity extends TransitionHelper.BaseActivity {
                         }),
 //                        new CustomUrlPrimaryDrawerItem().withName(R.string.drawer_item_fragment_drawer).withDescription(R.string.drawer_item_fragment_drawer_desc).withIcon("https://avatars3.githubusercontent.com/u/1476232?v=3&s=460"),
                         new SectionDrawerItem().withName(R.string.drawer_item_section_header),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus).withTextColor(getResources().getColor(R.color.almost_black)),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withTextColor(getResources().getColor(R.color.almost_black)),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedIconColor(Color.RED).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Bullhorn").withTextColor(getResources().getColor(R.color.almost_black)),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(true).withTextColor(getResources().getColor(R.color.almost_black))
-                ) // add the items we want to use with our Drawer
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cart_plus).withTextColor(getResources().getColor(R.color.almost_black)).withSelectedColor(getResources().getColor(R.color.middleBlue)),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withTextColor(getResources().getColor(R.color.almost_black)).withSelectedColor(getResources().getColor(R.color.middleBlue)).withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                            @Override
+                            public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                                Intent mIntent = new Intent(Intent.ACTION_VIEW);
+                                mIntent.setData(Uri.parse("https://github.com/IronWill23"));
+                                startActivity(mIntent);
+                                return true;
+                            }
+                        }),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withSelectedColor(getResources().getColor(R.color.middleBlue)).withIconTintingEnabled(true).withIcon(new IconicsDrawable(this, GoogleMaterial.Icon.gmd_plus).actionBar().paddingDp(5).colorRes(R.color.material_drawer_dark_primary_text)).withTag("Bullhorn").withTextColor(getResources().getColor(R.color.almost_black)),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).withEnabled(true).withTextColor(getResources().getColor(R.color.almost_black)).withSelectedColor(getResources().getColor(R.color.middleBlue))
+                )
                 .withOnDrawerNavigationListener(new Drawer.OnDrawerNavigationListener() {
                     @Override
                     public boolean onNavigationClickListener(View clickedView) {
