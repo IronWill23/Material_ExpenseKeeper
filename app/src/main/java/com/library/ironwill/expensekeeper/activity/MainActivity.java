@@ -76,6 +76,7 @@ public class MainActivity extends TransitionHelper.BaseActivity {
 
     private long exitTime = 0;
     private static Boolean isFirstLogin = true;
+    private static Boolean stopFlag = false;
     private CardListFragment cardListFragment = null;
 
     private static final String[] dateList = {
@@ -125,7 +126,11 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         int income = Integer.parseInt(numIncome.getText().toString().substring(1));
         int expense = Integer.parseInt(numExpense.getText().toString().substring(1));
         per = expense * 100 / income;
-        progressBarHandler.post(updateProgress);
+        if (!stopFlag) {
+            progressBarHandler.post(updateProgress);
+        }else{
+            mArcProgress.setProgress(per);
+        }
         initBaseFragment(savedInstanceState);
     }
 
@@ -140,6 +145,7 @@ public class MainActivity extends TransitionHelper.BaseActivity {
 
     Runnable updateProgress = new Runnable() {
         int i = 0;
+
         @Override
         public void run() {
             i += 1;
@@ -147,7 +153,8 @@ public class MainActivity extends TransitionHelper.BaseActivity {
             msg.arg1 = i;
             if (i == per + 1) {
                 progressBarHandler.removeCallbacks(updateProgress);
-            }else{
+                stopFlag = true;
+            } else {
                 progressBarHandler.sendMessage(msg);
             }
         }

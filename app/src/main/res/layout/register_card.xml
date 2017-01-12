@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@drawable/register_card_background"
     android:orientation="vertical"
     android:padding="15dp">
 

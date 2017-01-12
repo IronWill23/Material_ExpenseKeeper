@@ -81,9 +81,6 @@ public class CardDetailFragment extends TransitionHelper.BaseFragment {
     @Override
     public void onBeforeViewShows(View contentView) {
         ViewCompat.setTransitionName(mScrollView, "detail_element");
-//        ViewCompat.setTransitionName(getActivity().findViewById(R.id.fab_add), "fab");
-//        MainActivity.of(getActivity()).addFABtn.setTranslationY(400);
-
         TransitionHelper.excludeEnterTarget(getActivity(), R.id.toolbar_container, true);
         TransitionHelper.excludeEnterTarget(getActivity(), R.id.full_screen, true);
     }
@@ -98,7 +95,7 @@ public class CardDetailFragment extends TransitionHelper.BaseFragment {
     @Override
     public boolean onBeforeBack() {
         MainActivity.of(getActivity()).animateHomeIcon(MaterialMenuDrawable.IconState.BURGER);
-        MainActivity.of(getActivity()).fragmentBackground.animate().scaleX(1).scaleY(1).alpha(1).translationY(0).setDuration(Navigator.ANIM_DURATION/4).setInterpolator(new DecelerateInterpolator()).start();
+        MainActivity.of(getActivity()).fragmentBackground.animate().scaleX(1).scaleY(1).alpha(1).translationY(0).setDuration(Navigator.ANIM_DURATION).setInterpolator(new DecelerateInterpolator()).start();
         TransitionHelper.fadeThenFinish(tvTextBody, getActivity());
         return false;
     }
