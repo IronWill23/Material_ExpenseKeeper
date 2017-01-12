@@ -16,9 +16,6 @@ import android.view.View;
 import com.library.ironwill.expensekeeper.R;
 
 
-/**
- * Created by bruce on 11/6/14.
- */
 public class ArcProgress extends View {
     private Paint paint;
     protected Paint textPaint;
@@ -42,8 +39,8 @@ public class ArcProgress extends View {
     private float arcBottomHeight;
 
     private final int default_finished_color = Color.WHITE;
-    private final int default_unfinished_color = Color.rgb(72, 106, 176);
-    private final int default_text_color = Color.rgb(66, 145, 241);
+    private final int default_unfinished_color = Color.rgb(51, 152, 255);
+    private final int default_text_color = Color.rgb(51, 152, 255);
     private final float default_suffix_text_size;
     private final float default_suffix_padding;
     private final float default_bottom_text_size;
@@ -294,10 +291,10 @@ public class ArcProgress extends View {
             canvas.drawText(text, (getWidth() - textPaint.measureText(text)) / 2.0f, textBaseline, textPaint);
             textPaint.setTextSize(suffixTextSize);
             float suffixHeight = textPaint.descent() + textPaint.ascent();
-            canvas.drawText(suffixText, getWidth() / 2.0f  + textPaint.measureText(text) + suffixTextPadding, textBaseline + textHeight - suffixHeight, textPaint);
+            canvas.drawText(suffixText, getWidth() / 2.0f + textPaint.measureText(text) + suffixTextPadding, textBaseline + textHeight - suffixHeight, textPaint);
         }
 
-        if(arcBottomHeight == 0) {
+        if (arcBottomHeight == 0) {
             float radius = getWidth() / 2f;
             float angle = (360 - arcAngle) / 2f;
             arcBottomHeight = radius * (float) (1 - Math.cos(angle / 180 * Math.PI));
@@ -332,7 +329,7 @@ public class ArcProgress extends View {
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        if(state instanceof Bundle) {
+        if (state instanceof Bundle) {
             final Bundle bundle = (Bundle) state;
             strokeWidth = bundle.getFloat(INSTANCE_STROKE_WIDTH);
             suffixTextSize = bundle.getFloat(INSTANCE_SUFFIX_TEXT_SIZE);

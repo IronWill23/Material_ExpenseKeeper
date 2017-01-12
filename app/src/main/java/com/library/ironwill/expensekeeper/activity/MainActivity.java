@@ -8,8 +8,12 @@ import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.PopupMenu;
 import android.view.KeyEvent;
@@ -68,6 +72,8 @@ public class MainActivity extends TransitionHelper.BaseActivity {
     private static final int PROFILE_SETTING = 1;
     private Drawer drawer = null;
 
+    private int per;
+
     private long exitTime = 0;
     private static Boolean isFirstLogin = true;
     private CardListFragment cardListFragment = null;
@@ -77,6 +83,7 @@ public class MainActivity extends TransitionHelper.BaseActivity {
     };
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -117,11 +124,34 @@ public class MainActivity extends TransitionHelper.BaseActivity {
 
         int income = Integer.parseInt(numIncome.getText().toString().substring(1));
         int expense = Integer.parseInt(numExpense.getText().toString().substring(1));
-        int per = expense / income;
-//        mArcProgress.setProgress(100 * per);
-        mArcProgress.setProgress(42);
+        per = expense * 100 / income;
+        progressBarHandler.post(updateProgress);
         initBaseFragment(savedInstanceState);
     }
+
+    Handler progressBarHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            mArcProgress.setProgress(msg.arg1);
+            progressBarHandler.postDelayed(updateProgress, 20);
+        }
+    };
+
+    Runnable updateProgress = new Runnable() {
+        int i = 0;
+        @Override
+        public void run() {
+            i += 1;
+            Message msg = progressBarHandler.obtainMessage();
+            msg.arg1 = i;
+            if (i == per + 1) {
+                progressBarHandler.removeCallbacks(updateProgress);
+            }else{
+                progressBarHandler.sendMessage(msg);
+            }
+        }
+    };
 
     private void initDrawer(Bundle savedInstanceState) {
         profile = new ProfileDrawerItem().withName("Batman").withEmail("Bruce.Bat@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile));
@@ -151,9 +181,9 @@ public class MainActivity extends TransitionHelper.BaseActivity {
                             @Override
                             public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                                 int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-                                if(mode == Configuration.UI_MODE_NIGHT_YES) {
+                                if (mode == Configuration.UI_MODE_NIGHT_YES) {
                                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                                } else if(mode == Configuration.UI_MODE_NIGHT_NO) {
+                                } else if (mode == Configuration.UI_MODE_NIGHT_NO) {
                                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                                 }
                                 getWindow().setWindowAnimations(R.style.WindowAnimFadeInOut);
@@ -230,6 +260,7 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         super.onSaveInstanceState(outState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initToolbar() {
         //setup the Action for Material Menu
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -251,7 +282,8 @@ public class MainActivity extends TransitionHelper.BaseActivity {
 
         //set up the spinner in toolbar
         //TODO Add a spinner animation
-        mSpinner.setBackgroundColor(getResources().getColor(R.color.middleRed));
+        Drawable mDrawable = getDrawable(R.drawable.spinner_background);
+        mSpinner.setBackground(mDrawable);
         mSpinner.setTextColor(getResources().getColor(R.color.white));
         mSpinner.setArrowColor(getResources().getColor(R.color.white));
         mSpinner.setItems(dateList);

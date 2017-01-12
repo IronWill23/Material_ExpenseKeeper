@@ -45,7 +45,7 @@ public class IronRecyclerView extends RecyclerView {
         super(context, attrs, defStyle);
 
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-        maxLength = ((int) (180 * context.getResources().getDisplayMetrics().density + 0.5f));
+        maxLength = ((int) (190 * context.getResources().getDisplayMetrics().density + 0.5f));
         mScroller = new Scroller(context, new LinearInterpolator(context, null));
 
     }

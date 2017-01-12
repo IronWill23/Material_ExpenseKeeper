@@ -131,7 +131,7 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
         items.remove(position);
         notifyDataSetChanged();
         if (items.size() == 0) {
-            Toast.makeText(mActivity, "No more Data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity, "All Cleared", Toast.LENGTH_SHORT).show();
         }
     }
 

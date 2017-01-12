@@ -238,8 +238,8 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
 
                     mList.add(new ItemCategory(
                             R.mipmap.ic_launcher,
-                            "$ " + titleText.getText().toString(),
-                            contentText.getText().toString(),
+                            titleText.getText().toString(),
+                            "$ " + contentText.getText().toString(),
                             0
                     ));
                     mAdapter = new RvCategoryAdapter();
