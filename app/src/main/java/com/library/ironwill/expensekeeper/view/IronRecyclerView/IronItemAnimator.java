@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Created by s4051329 on 12/22/2016.
- */
 public class IronItemAnimator extends SimpleItemAnimator {
     private static final boolean DEBUG = false;
 

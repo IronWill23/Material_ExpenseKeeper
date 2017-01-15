@@ -77,7 +77,7 @@ public class IronRecyclerView extends RecyclerView {
                 View view = getChildAt(pos - mFirstPosition);
                 if (null != view) {
                     RvCategoryAdapter.ViewHolder viewHolder = (RvCategoryAdapter.ViewHolder) getChildViewHolder(view);
-                    itemLayout = viewHolder.mContainer;
+//                    itemLayout = viewHolder.mContainer;
                     imageView = (ImageView) itemLayout.findViewById(R.id.iv_delete);
                 }
 

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -142,7 +141,7 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
         public TextView mName;
         public TextView mNum;
         public ImageView mColor;
-        public LinearLayout mContainer;
+//        public LinearLayout mContainer;
         public ImageView mDelete;
 
         public ViewHolder(View itemView) {
@@ -151,7 +150,7 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
             mName = (TextView) itemView.findViewById(R.id.category_name);
             mColor = (ImageView) itemView.findViewById(R.id.category_color);
             mPic = (ImageView) itemView.findViewById(R.id.category_icon);
-            mContainer = (LinearLayout) itemView.findViewById(R.id.ll_container);
+//            mContainer = (LinearLayout) itemView.findViewById(R.id.ll_container);
             mDelete = (ImageView) itemView.findViewById(R.id.iv_delete);
             /*itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);*/

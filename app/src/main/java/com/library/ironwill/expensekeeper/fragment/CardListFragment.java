@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.activity.MainActivity;
+import com.library.ironwill.expensekeeper.adapter.ItemRvCategoryAdapter;
 import com.library.ironwill.expensekeeper.adapter.RvCategoryAdapter;
 import com.library.ironwill.expensekeeper.helper.TransitionHelper;
 import com.library.ironwill.expensekeeper.model.ItemCategory;
@@ -24,8 +27,6 @@ import com.library.ironwill.expensekeeper.util.Navigator;
 import com.library.ironwill.expensekeeper.view.ExplosionView.ExplosionField;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.CustomLinearLayoutManager;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.HidingScrollListener;
-import com.library.ironwill.expensekeeper.view.IronRecyclerView.IronItemAnimator;
-import com.library.ironwill.expensekeeper.view.IronRecyclerView.IronRecyclerView;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.RecyclerViewClickListener;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.SimpleDividerItemDecoration;
 import com.library.ironwill.expensekeeper.view.PageCurlView.PageCurlView;
@@ -35,8 +36,10 @@ import java.util.ArrayList;
 
 public class CardListFragment extends TransitionHelper.BaseFragment implements RvCategoryAdapter.OnRemoveItemListener{ // implements OnStartDragListener
 
-    private IronRecyclerView mRecyclerView;
-    private RvCategoryAdapter mAdapter;
+//    private IronRecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
+//    private RvCategoryAdapter mAdapter;
+    private ItemRvCategoryAdapter mAdapter;
     private CustomLinearLayoutManager cLinearLayoutManager;
     private ItemCategory mCategory;
     private static ArrayList<ItemCategory> mList;
@@ -76,7 +79,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_card_list, container, false);
-        mRecyclerView = (IronRecyclerView) rootView.findViewById(R.id.recycler_list);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_list);
         addFABtn = (FloatingActionButton) rootView.findViewById(R.id.fab_add);
         doneFABtn = (FloatingActionButton) rootView.findViewById(R.id.fab_done);
         mBottomSheet = rootView.findViewById(R.id.id_rl_bottomSheet);
@@ -120,7 +123,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
         mRecyclerView.setLayoutManager(cLinearLayoutManager);
         mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getActivity()));
 
-        mAdapter = new RvCategoryAdapter();
+        mAdapter = new ItemRvCategoryAdapter();
         mAdapter.updateList(getList(), getActivity());
         mRecyclerView.addOnItemTouchListener(new RecyclerViewClickListener(getActivity(), new RecyclerViewClickListener.OnItemClickListener() {
             @Override
@@ -156,9 +159,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
             }
         });*/
         mRecyclerView.setAdapter(mAdapter);
-        IronItemAnimator mIronItemAnimator = new IronItemAnimator();
-        mIronItemAnimator.setAddDuration(1500);
-        mIronItemAnimator.setRemoveDuration(700);
+        DefaultItemAnimator mIronItemAnimator = new DefaultItemAnimator();
         mRecyclerView.setItemAnimator(mIronItemAnimator);
     }
 
@@ -170,6 +171,18 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
         if (lastVisibleItem == totalItemCount - 1){
             addFABtn.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
         }
+    }
+
+    private void openMenu(View view) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", 0, 65, 135);
+        animator.setDuration(500);
+        animator.start();
+    }
+
+    private void closeMenu(View view) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", 135, 65, 0);
+        animator.setDuration(500);
+        animator.start();
     }
 
     private void initFBtnAction() {
@@ -193,7 +206,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
                     ObjectAnimator animatorY = ObjectAnimator.ofFloat(doneFABtn, "scaleY", 1f, 1.14f, 1f);
                     AnimatorSet animSet = new AnimatorSet();
                     animSet.play(animatorX).with(animatorY);
-                    animSet.setDuration(700);
+                    animSet.setDuration(500);
                     animSet.start();
                     cLinearLayoutManager.setScrollEnabled(false);
                     mRecyclerView.setLayoutManager(cLinearLayoutManager);
@@ -203,7 +216,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
                     ObjectAnimator animatorY = ObjectAnimator.ofFloat(doneFABtn, "scaleY", 1f, 0f);
                     AnimatorSet animSet = new AnimatorSet();
                     animSet.playTogether(animatorX, animatorY);
-                    animSet.setDuration(700);
+                    animSet.setDuration(500);
                     animSet.start();
                     cLinearLayoutManager.setScrollEnabled(true);
                     mRecyclerView.setLayoutManager(cLinearLayoutManager);
@@ -227,19 +240,9 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
                     closeMenu(view);
                 }
             }
-
-            private void openMenu(View view) {
-                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", 0, 65, 135);
-                animator.setDuration(600);
-                animator.start();
-            }
-
-            private void closeMenu(View view) {
-                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotation", 135, 65, 0);
-                animator.setDuration(600);
-                animator.start();
-            }
         });
+
+
         doneFABtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -251,11 +254,12 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
                             "$ " + contentText.getText().toString(),
                             0
                     ));
-                    mAdapter = new RvCategoryAdapter();
+                    mAdapter = new ItemRvCategoryAdapter();
                     mAdapter.updateList(mList, getActivity());
                     mRecyclerView.setAdapter(mAdapter);
                     mBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     titleText.setText("");
+                    closeMenu(addFABtn);
                     contentText.setText("");
                 } else {
                     Toast.makeText(getActivity(), "Title and Content are null",

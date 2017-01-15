@@ -2,237 +2,180 @@ package com.library.ironwill.expensekeeper.view.MaterialDelete;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.widget.ViewDragHelper;
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
-import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.FrameLayout;
 
 import com.library.ironwill.expensekeeper.R;
 import com.plattysoft.leonids.ParticleSystem;
 
+import java.lang.reflect.Field;
+import java.util.Random;
+
 public class MaterialDeleteLayout extends FrameLayout {
-    private static final String TAG = "cjj_log";
-    private ViewDragHelper mViewDragHelper;
-    private View mRightHideView;
-    private View mContentView;
-    private float mFraction;
-    private static final int MIN_FLING_VELOCITY = 400;
-    private ParticleSystem particleSystem_1_5;
-    private ParticleSystem particleSystem_2_5;
-    private ParticleSystem particleSystem_3_5;
-    private ParticleSystem particleSystem_4_5;
-    private ParticleSystem particleSystem_5_5;
-    private int[] location = new int[2];
+
+    private static final String TAG = "MaterialDeleteLayout";
+
+    private static final int COUNT_OF_PARTICAL_BITMAP = 300;
+    private static final int TIME_TO_LIVE = 1000;
+    private static final int TIME_TO_FADE_OUT = 200;
+    private static final int DEFAULT_PARTICLE_BITMAP = R.drawable.ic_partical;
+
+    private ViewGroup backLayout;
+
+    private boolean isSwape = false;
+    private boolean isDelete = false;
+
+    private float startX;
+    private int clipWidth = 0;
+    int[] backLocation;
+
+    private int[] bitmapArrays;
+
+    private Rect backLayoutRect;
+    private DeleteListener mDeleteListener;
+    private ParticleSystem particleSystem;
 
     public MaterialDeleteLayout(Context context) {
-        super(context);
-        init();
+        this(context, null);
     }
 
     public MaterialDeleteLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+        this(context, attrs, 0);
     }
 
     public MaterialDeleteLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        backLayoutRect = new Rect();
+        backLocation = new int[2];
     }
 
-    private void init() {
-        mViewDragHelper = ViewDragHelper.create(this,1.0f,new DragHelperCallbackListener());
-        mViewDragHelper.setEdgeTrackingEnabled(ViewDragHelper.EDGE_RIGHT);
-        mViewDragHelper.setMinVelocity(MIN_FLING_VELOCITY);
-        Log.i(TAG, "cjj init");
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        if (getChildCount() != 1) {
+            throw new IllegalArgumentException("the count of child view must be one !");
+        }
+
+        backLayout = (ViewGroup) getChildAt(0);
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec),  MeasureSpec.getSize(heightMeasureSpec));
-        View contentView = getChildAt(0);
-        if(contentView == null)
-        {
-            throw new RuntimeException("you must set contentView");
-        }
-        Log.i(TAG,"cjj onmeasure");
-        MarginLayoutParams lp = (MarginLayoutParams) contentView.getLayoutParams();
-        int contentWSpec = MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(widthMeasureSpec) - lp.leftMargin - lp.rightMargin, MeasureSpec.EXACTLY);
-        int contentHSpec = MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(heightMeasureSpec) - lp.topMargin - lp.bottomMargin, MeasureSpec.EXACTLY);
-        contentView.measure(contentWSpec, contentHSpec);
-        mContentView = contentView;
-
-        mRightHideView = getChildAt(1);
-        if(mRightHideView == null)
-        {
-            throw new RuntimeException("you must set right hide view");
-        }
-        MarginLayoutParams lp2 = (MarginLayoutParams)
-                mRightHideView.getLayoutParams();
-        final int hideViewWidthSpec = getChildMeasureSpec(widthMeasureSpec, lp2.leftMargin + lp2.rightMargin, lp2.width);
-        final int hideViewHeightSpec = getChildMeasureSpec(heightMeasureSpec, lp2.topMargin + lp2.bottomMargin, lp2.height);
-        mRightHideView.measure(hideViewWidthSpec, hideViewHeightSpec);
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        backLayout.getLocationInWindow(backLocation);
+        backLayoutRect.set(backLocation[0], backLocation[1],
+                backLocation[0] + backLayout.getMeasuredWidth(),
+                backLocation[1] + backLayout.getMeasuredHeight());
     }
-
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        MarginLayoutParams lp = (MarginLayoutParams) mContentView.getLayoutParams();
-        mContentView.layout(lp.leftMargin, lp.topMargin, lp.leftMargin + mContentView.getMeasuredWidth(), lp.topMargin + mContentView.getMeasuredHeight());
-        lp = (MarginLayoutParams) mRightHideView.getLayoutParams();
-        int rightHideWidth = mRightHideView.getMeasuredWidth();
-        int childRight = rightHideWidth - (int) (rightHideWidth * mFraction);
-        mRightHideView.layout(childRight, lp.topMargin, childRight + rightHideWidth, lp.topMargin + mRightHideView.getMeasuredHeight());
-    }
-
-    public class DragHelperCallbackListener extends ViewDragHelper.Callback
-    {
-
-        @Override
-        public boolean tryCaptureView(View child, int pointerId) {
-            return child == mRightHideView;
-        }
-
-        @Override
-        public int clampViewPositionHorizontal(View child, int left, int dx)
-        {
-            int l = Math.max(0, Math.min(left, child.getWidth()));
-            return l;
-        }
-
-
-        @Override
-        public void onEdgeDragStarted(int edgeFlags, int pointerId)
-        {
-            mViewDragHelper.captureChildView(mRightHideView, pointerId);
-            startParticle();
-        }
-
-        @Override
-        public void onViewReleased(View releasedChild, float xvel, float yvel)
-        {
-            int childWidth = releasedChild.getWidth();
-            float offset = 1.0f -( releasedChild.getLeft()) * 1.0f / childWidth;
-            boolean flag = xvel <= 0  && offset > 0.3f;
-            if(flag && deleteListener != null)
-            {
-                deleteListener.onDelete();
-            }
-            mViewDragHelper.settleCapturedViewAt(flag ? 0 : childWidth, releasedChild.getTop());
-            stopParticle();
-            invalidate();
-        }
-
-        @Override
-        public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy)
-        {
-            int w = changedView.getWidth();
-            float fraction = (float) (w - left) / w;
-            mFraction = fraction;
-            changedView.setVisibility(fraction == 0 ? View.INVISIBLE : View.VISIBLE);
-            mRightHideView.getLocationInWindow(location);
-            updateParticle(left);
-            invalidate();
-        }
-
-        @Override
-        public int getViewHorizontalDragRange(View child)
-        {
-            return mRightHideView == child ? 1 : 0;
-        }
-    }
-
-    private void startParticle() {
-        particleSystem_1_5 = new ParticleSystem((Activity) getContext(), 40, R.drawable.ic_partical, 1000);
-        particleSystem_1_5.setAcceleration(0.00013f, 90)
-                .setSpeedByComponentsRange(0f, 0.3f, 0.05f, 0.3f)
-                .setFadeOut(200, new AccelerateInterpolator())
-                .emitWithGravity(mRightHideView, Gravity.LEFT, 40);
-        particleSystem_2_5 = new ParticleSystem((Activity) getContext(), 40, R.drawable.ic_partical, 1000);
-        particleSystem_2_5.setAcceleration(0.00013f, 90)
-                .setSpeedByComponentsRange(0f, 0.3f, 0.05f, 0.3f)
-                .setFadeOut(200, new AccelerateInterpolator())
-                .emitWithGravity(mRightHideView, Gravity.LEFT, 40);
-        particleSystem_3_5 = new ParticleSystem((Activity) getContext(), 40, R.drawable.ic_partical, 1000);
-        particleSystem_3_5.setAcceleration(0.00013f, 90)
-                .setSpeedByComponentsRange(0f, 0.3f, 0.05f, 0.3f)
-                .setFadeOut(200, new AccelerateInterpolator())
-                .emitWithGravity(mRightHideView, Gravity.LEFT, 40);
-        particleSystem_4_5 = new ParticleSystem((Activity) getContext(), 40, R.drawable.ic_partical, 1000);
-        particleSystem_4_5.setAcceleration(0.00013f, 90)
-                .setSpeedByComponentsRange(0f, 0.3f, 0.05f, 0.3f)
-                .setFadeOut(200, new AccelerateInterpolator())
-                .emitWithGravity(mRightHideView, Gravity.LEFT, 40);
-        particleSystem_5_5 = new ParticleSystem((Activity) getContext(), 40, R.drawable.ic_partical, 1000);
-        particleSystem_5_5.setAcceleration(0.00013f, 90)
-                .setSpeedByComponentsRange(0f, 0.3f, 0.05f, 0.3f)
-                .setFadeOut(200, new AccelerateInterpolator())
-                .emitWithGravity(mRightHideView, Gravity.LEFT, 40);
-    }
-
-    public void updateParticle(int left)
-    {
-        particleSystem_1_5.updateEmitPoint(left, location[1] + mRightHideView.getHeight() * 1 / 5);
-        particleSystem_5_5.updateEmitPoint(left, location[1] + mRightHideView.getHeight() * 1 / 5);
-        particleSystem_2_5.updateEmitPoint(left, location[1] + mRightHideView.getHeight() * 2 / 5);
-        particleSystem_3_5.updateEmitPoint(left, location[1] + mRightHideView.getHeight() * 3 / 5);
-        particleSystem_4_5.updateEmitPoint(left, location[1] + mRightHideView.getHeight() * 4 / 5);
-    }
-
-    public void stopParticle()
-    {
-        particleSystem_1_5.stopEmitting();
-        particleSystem_5_5.stopEmitting();
-        particleSystem_2_5.stopEmitting();
-        particleSystem_3_5.stopEmitting();
-        particleSystem_4_5.stopEmitting();
-    }
-
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        switch (ev.getAction())
-        {
-            case MotionEvent.ACTION_MOVE:
-                getParent().requestDisallowInterceptTouchEvent(true);
-                break;
-        }
-        return mViewDragHelper.shouldInterceptTouchEvent(ev);
+        return true;
+    }
+
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        canvas.clipRect(0, 0, backLayoutRect.right - clipWidth, getHeight());
+        super.dispatchDraw(canvas);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        mViewDragHelper.processTouchEvent(event);
-        return true;
-    }
 
-    @Override
-    public void computeScroll()
-    {
-        if (mViewDragHelper.continueSettling(true))
-        {
-            invalidate();
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                if (event.getX() > backLayoutRect.width() * 3 / 4) {
+                    isSwape = true;
+                    startX = event.getX();
+
+                    if (bitmapArrays == null || bitmapArrays.length == 0) {
+                        particleSystem = new ParticleSystem((Activity) getContext(), COUNT_OF_PARTICAL_BITMAP, DEFAULT_PARTICLE_BITMAP, TIME_TO_LIVE);
+                    } else {
+                        Random random = new Random();
+                        int resId = bitmapArrays[random.nextInt(bitmapArrays.length)];
+                        particleSystem = new ParticleSystem((Activity) getContext(), COUNT_OF_PARTICAL_BITMAP, resId, TIME_TO_LIVE);
+                    }
+
+                    particleSystem.setAcceleration(0.00013f, 90)
+                            .setSpeedByComponentsRange(0f, 0.3f, 0.05f, 0.3f)
+                            .setFadeOut(TIME_TO_FADE_OUT, new AccelerateInterpolator())
+                            .emitWithGravity(backLayout, Gravity.RIGHT, COUNT_OF_PARTICAL_BITMAP);
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                clipWidth = (int) (startX - event.getX());
+                if (isSwape && clipWidth > 0) {
+                    requestLayout();
+                    particleSystem.updateEmitVerticalLine(backLayoutRect.right - clipWidth, backLayoutRect.top - getStatusBarHeight(), backLayoutRect.bottom - getStatusBarHeight());
+                } else {
+                    particleSystem.stopEmitting();
+                }
+                getParent().requestDisallowInterceptTouchEvent(true);
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                startX = 0;
+                clipWidth = 0;
+                invalidate();
+                isSwape = false;
+                particleSystem.stopEmitting();
+                getParent().requestDisallowInterceptTouchEvent(false);
+
+                if (event.getX() >= getWidth() / 2) {
+                    isDelete = false;
+                } else {
+                    isDelete = true;
+                }
+
+                if (isDelete) {
+                    if (mDeleteListener != null) {
+                        mDeleteListener.onDelete();
+                    }
+                }
+                break;
         }
+
+        if (isSwape) {
+            return true;
+        }
+
+        return super.onTouchEvent(event);
     }
 
-    public interface SwipeDeleteListener
-    {
-        public void onDelete();
+    public interface DeleteListener {
+        void onDelete();
     }
 
-    private SwipeDeleteListener deleteListener;
-
-    public void setDeleteListener( SwipeDeleteListener deleteListener)
-    {
-        this.deleteListener = deleteListener;
+    public void setDeleteListener(DeleteListener listener) {
+        mDeleteListener = listener;
     }
 
-    public void closeItem()
-    {
-        View view = mRightHideView;
-        mFraction = 0.f;
-        mViewDragHelper.smoothSlideViewTo(view, view.getWidth(), view.getTop());
+    public void setBitmapArrays(int... resId) {
+        bitmapArrays = resId;
     }
+
+    private int getStatusBarHeight() {
+
+        try {
+            Class c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = Integer.parseInt(field.get(obj).toString());
+            return getResources().getDimensionPixelSize(x);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
 }
