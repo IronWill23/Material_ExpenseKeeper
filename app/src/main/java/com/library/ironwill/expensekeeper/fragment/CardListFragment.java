@@ -28,6 +28,7 @@ import com.library.ironwill.expensekeeper.view.IronRecyclerView.IronItemAnimator
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.IronRecyclerView;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.RecyclerViewClickListener;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.SimpleDividerItemDecoration;
+import com.library.ironwill.expensekeeper.view.PageCurlView.PageCurlView;
 import com.library.ironwill.expensekeeper.view.RandomTextView.RandomTextView;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
     private BottomSheetBehavior mBehavior;
     private View mBottomSheet;
     private EditText titleText, contentText;
+    private PageCurlView mCurlView;
 
     private int lastVisibleItem;
     private int totalItemCount;
@@ -80,7 +82,14 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
         mBottomSheet = rootView.findViewById(R.id.id_rl_bottomSheet);
         titleText = (EditText) rootView.findViewById(R.id.id_et_new_name);
         contentText = (EditText) rootView.findViewById(R.id.id_et_new_num);
+        mCurlView = (PageCurlView) rootView.findViewById(R.id.cal_curl);
         mRecyclerView.setFocusable(false);
+        mCurlView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         ExplosionField explosionField = new ExplosionField(getActivity());
         explosionField.addListener(rootView.findViewById(R.id.cardView_main));

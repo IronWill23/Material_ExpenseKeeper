@@ -45,7 +45,7 @@ public class RvCategoryAdapter<T> extends RecyclerView.Adapter<RvCategoryAdapter
 
     @Override
     public RvCategoryAdapter<T>.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_cardview_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.delete_list_cardview_item, parent, false);
         return new ViewHolder(view);
     }
 

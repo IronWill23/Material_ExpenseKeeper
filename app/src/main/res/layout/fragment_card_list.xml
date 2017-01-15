@@ -22,6 +22,7 @@
             android:layout_height="83dp">
 
             <com.library.ironwill.expensekeeper.view.PageCurlView.PageCurlView
+                android:id="@+id/cal_curl"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5" />
