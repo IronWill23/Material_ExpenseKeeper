@@ -1,6 +1,7 @@
 package com.library.ironwill.expensekeeper.adapter;
 
 import android.app.Activity;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,17 +34,26 @@ public class ItemRvCategoryAdapter<T> extends RecyclerView.Adapter<ItemRvCategor
     }
 
     @Override
-    public void onBindViewHolder(final ItemRvCategoryAdapter<T>.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ItemRvCategoryAdapter<T>.ViewHolder holder, int position) {
         final ItemCategory category = (ItemCategory) items.get(position);
-        holder.mLayout.setDeleteListener(new MaterialDeleteLayout.DeleteListener() {
+        holder.mLayout.setDeleteListener(new MaterialDeleteLayout.SwipeDeleteListener() {
             @Override
             public void onDelete() {
-                items.remove(position);
-                notifyItemRemoved(position);
-                notifyItemRangeChanged(position, items.size() - position);
+                int pos = (int) holder.mLayout.getTag();
+                notifyItemRemoved(pos);
+                items.remove(pos);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        holder.mLayout.closeItem();
+                        notifyDataSetChanged();
+                    }
+                }, 1000);
             }
         });
-        holder.mLayout.setBitmapArrays(R.drawable.ic_partical, R.drawable.ic_partical);
+        holder.mLayout.setTag(position);
+//        holder.mLayout.setBitmapArrays(R.drawable.ic_partical, R.drawable.ic_partical);
         holder.mName.setText(category.getCategoryName());
         holder.mNum.setText(category.getMoneyNum());
         if (category.getColor() == 0) {
@@ -89,7 +99,7 @@ public class ItemRvCategoryAdapter<T> extends RecyclerView.Adapter<ItemRvCategor
             mColor = (ImageView) itemView.findViewById(R.id.category_color);
             mPic = (ImageView) itemView.findViewById(R.id.category_icon);
             mDelete = (ImageView) itemView.findViewById(R.id.iv_delete);
-            mLayout = (MaterialDeleteLayout) itemView.findViewById(R.id.item_delete_layout);
+            mLayout = (MaterialDeleteLayout) itemView.findViewById(R.id.delete_card_layout);
         }
     }
 }

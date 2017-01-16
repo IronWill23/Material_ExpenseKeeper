@@ -18,6 +18,7 @@
         app:cardCornerRadius="8dp">
 
         <LinearLayout
+            android:id="@+id/statistic_container"
             android:layout_width="match_parent"
             android:layout_height="83dp">
 

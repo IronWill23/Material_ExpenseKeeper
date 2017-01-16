@@ -12,8 +12,10 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.PopupMenu;
@@ -28,10 +30,13 @@ import android.widget.Toast;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.MaterialMenuView;
 import com.jaeger.library.StatusBarUtil;
+import com.library.ironwill.expensekeeper.App;
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.fragment.CardDetailFragment;
 import com.library.ironwill.expensekeeper.fragment.CardListFragment;
+import com.library.ironwill.expensekeeper.fragment.CardStatisticFragment;
 import com.library.ironwill.expensekeeper.helper.TransitionHelper;
+import com.library.ironwill.expensekeeper.util.AppConfig;
 import com.library.ironwill.expensekeeper.util.BitmapUtil;
 import com.library.ironwill.expensekeeper.view.ArcProgress.ArcProgress;
 import com.library.ironwill.expensekeeper.view.DrawerItems.CustomPrimaryDrawerItem;
@@ -51,18 +56,26 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import immortalz.me.library.TransitionsHeleper;
 import immortalz.me.library.bean.InfoBean;
 import immortalz.me.library.method.ColorShowMethod;
 
-public class MainActivity extends TransitionHelper.BaseActivity {
+public class MainActivity extends TransitionHelper.BaseActivity implements DatePickerDialog.OnDateSetListener {
 
     protected static String BASE_FRAGMENT = "base_fragment";
     private MaterialMenuDrawable.IconState currentIconState;
     private ArcProgress mArcProgress;
     private TextView numIncome, numExpense;
     private MaterialSpinner mSpinner;
+    private ImageView calImage;
 
     private MaterialMenuView homeButton;
     public View fragmentBackground;
@@ -79,6 +92,14 @@ public class MainActivity extends TransitionHelper.BaseActivity {
     private static Boolean isFirstLogin = true;
     private static Boolean stopFlag = false;
     private CardListFragment cardListFragment = null;
+
+    //Camera
+    private static Uri fileUri;
+    private static final int MEDIA_TYPE_IMAGE = 1;
+    private static final int MEDIA_TYPE_VIDEO = 2;
+    private static final int PICK_IMAGE_FROM_ALBUM = 100;
+    private static final int PICK_IMAGE_FROM_CAMERA = 300;
+    private static final int CROP_REQUEST_CODE = 400;
 
     private static final String[] dateList = {
             "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
@@ -129,7 +150,7 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         per = expense * 100 / income;
         if (!stopFlag) {
             progressBarHandler.post(updateProgress);
-        }else{
+        } else {
             mArcProgress.setProgress(per);
         }
         initBaseFragment(savedInstanceState);
@@ -140,7 +161,7 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             mArcProgress.setProgress(msg.arg1);
-            progressBarHandler.postDelayed(updateProgress, 20);
+            progressBarHandler.postDelayed(updateProgress, 27);
         }
     };
 
@@ -304,6 +325,74 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         mSpinner.setArrowColor(getResources().getColor(R.color.white));
         mSpinner.setItems(dateList);
         mSpinner.setSelectedIndex(11);
+
+        calImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (App.isCalendarIcon) {
+                    Calendar now = Calendar.getInstance();
+                    DatePickerDialog dpd = DatePickerDialog.newInstance(
+                            MainActivity.this,
+                            now.get(Calendar.YEAR),
+                            now.get(Calendar.MONTH),
+                            now.get(Calendar.DAY_OF_MONTH)
+                    );
+                    dpd.vibrate(false);
+                    dpd.setVersion(DatePickerDialog.Version.VERSION_1);
+                    dpd.show(getFragmentManager(), "DatePickDialog");
+                } else {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    fileUri = Uri.fromFile(createOutputMediaFileName(MEDIA_TYPE_IMAGE));
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                    // start the image capture Intent
+                    startActivityForResult(intent, PICK_IMAGE_FROM_CAMERA);
+                }
+            }
+        });
+    }
+
+    /**
+     * returning image / video filename
+     */
+    private static File createOutputMediaFileName(int type) {
+
+        // External sdcard location
+        File mediaStorageDir = new File(Environment
+                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                AppConfig.IMAGE_DIRECTORY_NAME);
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null;
+            }
+        }
+
+        // Create a new media file name by timestamp
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File photoFilename;
+        if (type == MEDIA_TYPE_IMAGE) {
+            photoFilename = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + ".jpg");
+        } else if (type == MEDIA_TYPE_VIDEO) {
+            photoFilename = new File(mediaStorageDir.getPath() + File.separator
+                    + "VID_" + timeStamp + ".mp4");
+        } else {
+            return null;
+        }
+        return photoFilename;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_FROM_CAMERA) {
+            if (resultCode == RESULT_OK) {
+            } else if (resultCode == RESULT_CANCELED) {
+            } else {
+            }
+        }
     }
 
     private void initBaseFragment(Bundle savedInstanceState) {
@@ -325,9 +414,17 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         switch (fragmentResourceId) {
             case R.layout.fragment_card_list:
             default:
+                calImage.setImageResource(R.drawable.ic_calendar);
+                App.isCalendarIcon = true;
                 return new CardListFragment();
             case R.layout.fragment_card_detail:
+                calImage.setImageResource(R.drawable.ic_camera);
+                App.isCalendarIcon = false;
                 return CardDetailFragment.create();
+            case R.layout.fragment_statistic_detail:
+                calImage.setImageResource(R.drawable.ic_calendar);
+                App.isCalendarIcon = true;
+                return CardStatisticFragment.create();
         }
     }
 
@@ -345,6 +442,7 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         homeButton = (MaterialMenuView) findViewById(R.id.material_menu_button);
         fragmentBackground = findViewById(R.id.base_fragment_background);
         mSpinner = (MaterialSpinner) findViewById(R.id.spinner_date);
+        calImage = (ImageView) findViewById(R.id.calendar_pick);
     }
 
     public boolean animateHomeIcon(MaterialMenuDrawable.IconState iconState) {
@@ -384,5 +482,10 @@ public class MainActivity extends TransitionHelper.BaseActivity {
         } else {
             finish();
         }
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        String date = "You picked the following date: " + dayOfMonth + "/" + (++monthOfYear) + "/" + year;
     }
 }

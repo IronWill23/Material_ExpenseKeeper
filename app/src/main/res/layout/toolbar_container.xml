@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="4dp"
-        app:mm_color="#FFFFFF"
+        app:mm_color="@color/white"
         app:mm_strokeWidth="2"
         app:mm_transformDuration="1000" />
 
@@ -25,4 +25,12 @@
         android:layout_gravity="center_vertical"
         app:ms_dropdown_height="250dp"
         app:ms_dropdown_max_height="300dp" />
+
+    <ImageView
+        android:id="@+id/calendar_pick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="230dp"
+        />
 </LinearLayout>

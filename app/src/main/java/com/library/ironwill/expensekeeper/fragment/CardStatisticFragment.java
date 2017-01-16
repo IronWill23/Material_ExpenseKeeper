@@ -9,39 +9,53 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.TextView;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
-import com.library.ironwill.expensekeeper.App;
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.activity.MainActivity;
 import com.library.ironwill.expensekeeper.helper.TransitionHelper;
+import com.library.ironwill.expensekeeper.model.PieModel;
 import com.library.ironwill.expensekeeper.util.Navigator;
 import com.library.ironwill.expensekeeper.view.OverScrollView.OverScrollView;
+import com.library.ironwill.expensekeeper.view.statisticView.PieChart;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class CardDetailFragment extends TransitionHelper.BaseFragment {
+public class CardStatisticFragment extends TransitionHelper.BaseFragment {
 
 
-    private TextView tvTitle, tvTextBody;
+    private int[] mColors = {0xFFCCFF00, 0xFF6495ED, 0xFFE32636, 0xFF800000, 0xFF808000, 0xFFFF8C69, 0xFF808080,
+            0xFFE6B800, 0xFF7CFC00};
     private OverScrollView mScrollView;
     private View rootView;
+    private PieChart pieChart;
 
-    public static CardDetailFragment create() {
-        CardDetailFragment f = new CardDetailFragment();
+    public static CardStatisticFragment create() {
+        CardStatisticFragment f = new CardStatisticFragment();
         return f;
     }
 
-    public CardDetailFragment() {
+    public CardStatisticFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_card_detail, container, false);
+        rootView = inflater.inflate(R.layout.fragment_statistic_detail, container, false);
         initView();
-//        String itemText = getActivity().getIntent().getStringExtra("item_text");
-        String itemText = "Salary";
-        tvTitle.setText(itemText);
+
+        List<PieModel> dataEntities = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            PieModel entity = new PieModel("name" + i, i + 1, mColors[i]);
+            dataEntities.add(entity);
+        }
+        pieChart.setDataList(dataEntities);
+        pieChart.setOnItemPieClickListener(new PieChart.OnItemPieClickListener() {
+            @Override
+            public void onClick(int position) {
+            }
+        });
 
         mScrollView.setOverScrollListener(new OverScrollView.OverScrollListener() {
             int translationThreshold = 100;
@@ -51,7 +65,6 @@ public class CardDetailFragment extends TransitionHelper.BaseFragment {
                 if (Math.abs(yDistance) > translationThreshold) { //passed threshold
                     if (isReleased) {
                         getActivity().onBackPressed();
-                        App.isCalendarIcon = true;
                         return true;
                     } else {
                         MainActivity.of(getActivity()).animateHomeIcon(MaterialMenuDrawable.IconState.X);
@@ -69,15 +82,14 @@ public class CardDetailFragment extends TransitionHelper.BaseFragment {
 
     private void initView() {
         mScrollView = (OverScrollView) rootView.findViewById(R.id.overscroll_view);
-        tvTitle = (TextView) rootView.findViewById(R.id.detail_title);
-        tvTextBody = (TextView) rootView.findViewById(R.id.detail_body);
+        pieChart = (PieChart) rootView.findViewById(R.id.pie_chart);
     }
 
     private void initDetailBody() {
-        tvTextBody.setAlpha(0);
+        pieChart.setAlpha(0);
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                tvTextBody.animate().alpha(1).start();
+                pieChart.animate().alpha(1).start();
             }
         }, 500);
     }
@@ -100,7 +112,7 @@ public class CardDetailFragment extends TransitionHelper.BaseFragment {
     public boolean onBeforeBack() {
         MainActivity.of(getActivity()).animateHomeIcon(MaterialMenuDrawable.IconState.BURGER);
         MainActivity.of(getActivity()).fragmentBackground.animate().scaleX(1).scaleY(1).alpha(1).translationY(0).setDuration(Navigator.ANIM_DURATION).setInterpolator(new DecelerateInterpolator()).start();
-        TransitionHelper.fadeThenFinish(tvTextBody, getActivity());
+        TransitionHelper.fadeThenFinish(pieChart, getActivity());
         return false;
     }
 }

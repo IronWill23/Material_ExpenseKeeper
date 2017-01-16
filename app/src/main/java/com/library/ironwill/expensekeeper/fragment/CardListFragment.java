@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
@@ -29,16 +30,15 @@ import com.library.ironwill.expensekeeper.view.IronRecyclerView.CustomLinearLayo
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.HidingScrollListener;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.RecyclerViewClickListener;
 import com.library.ironwill.expensekeeper.view.IronRecyclerView.SimpleDividerItemDecoration;
-import com.library.ironwill.expensekeeper.view.PageCurlView.PageCurlView;
 import com.library.ironwill.expensekeeper.view.RandomTextView.RandomTextView;
 
 import java.util.ArrayList;
 
 public class CardListFragment extends TransitionHelper.BaseFragment implements RvCategoryAdapter.OnRemoveItemListener{ // implements OnStartDragListener
 
-//    private IronRecyclerView mRecyclerView;
+    //    private IronRecyclerView mRecyclerView;
     private RecyclerView mRecyclerView;
-//    private RvCategoryAdapter mAdapter;
+    //    private RvCategoryAdapter mAdapter;
     private ItemRvCategoryAdapter mAdapter;
     private CustomLinearLayoutManager cLinearLayoutManager;
     private ItemCategory mCategory;
@@ -50,10 +50,10 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
     private BottomSheetBehavior mBehavior;
     private View mBottomSheet;
     private EditText titleText, contentText;
-    private PageCurlView mCurlView;
 
     private int lastVisibleItem;
     private int totalItemCount;
+    private LinearLayout statisticContainer;
 
 
     public CardListFragment() {
@@ -80,19 +80,20 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_card_list, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_list);
+        statisticContainer = (LinearLayout) rootView.findViewById(R.id.statistic_container);
         addFABtn = (FloatingActionButton) rootView.findViewById(R.id.fab_add);
         doneFABtn = (FloatingActionButton) rootView.findViewById(R.id.fab_done);
         mBottomSheet = rootView.findViewById(R.id.id_rl_bottomSheet);
         titleText = (EditText) rootView.findViewById(R.id.id_et_new_name);
         contentText = (EditText) rootView.findViewById(R.id.id_et_new_num);
-        mCurlView = (PageCurlView) rootView.findViewById(R.id.cal_curl);
         mRecyclerView.setFocusable(false);
-        mCurlView.setOnClickListener(new View.OnClickListener() {
+        statisticContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Navigator.launchDetail(MainActivity.of(getActivity()), view, statisticContainer);
             }
         });
+
 
         ExplosionField explosionField = new ExplosionField(getActivity());
         explosionField.addListener(rootView.findViewById(R.id.cardView_main));
@@ -141,10 +142,9 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
             public void onShow() {
                 addFABtn.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
             }
+
             @Override
             public void onHide() {
-                /*RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) addFABtn.getLayoutParams();
-                int fabMargin = lp.bottomMargin;*/
                 addFABtn.animate().translationY(400)
                         .setInterpolator(new AccelerateInterpolator(2)).start();
             }
@@ -168,7 +168,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
     public void onRemoveListener() {
         lastVisibleItem = cLinearLayoutManager.findLastCompletelyVisibleItemPosition();
         totalItemCount = cLinearLayoutManager.getItemCount();
-        if (lastVisibleItem == totalItemCount - 1){
+        if (lastVisibleItem == totalItemCount - 1) {
             addFABtn.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
         }
     }
@@ -210,7 +210,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
                     animSet.start();
                     cLinearLayoutManager.setScrollEnabled(false);
                     mRecyclerView.setLayoutManager(cLinearLayoutManager);
-                } else if (mBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED){
+                } else if (mBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                     doneFABtn.setVisibility(View.GONE);
                     ObjectAnimator animatorX = ObjectAnimator.ofFloat(doneFABtn, "scaleX", 1f, 0f);
                     ObjectAnimator animatorY = ObjectAnimator.ofFloat(doneFABtn, "scaleY", 1f, 0f);
@@ -277,6 +277,7 @@ public class CardListFragment extends TransitionHelper.BaseFragment implements R
         }*/
         return super.onBeforeBack();
     }
+
 
 
 

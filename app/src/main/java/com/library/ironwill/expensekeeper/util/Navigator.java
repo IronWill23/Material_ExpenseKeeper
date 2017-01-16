@@ -7,6 +7,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.activity.MainActivity;
@@ -27,7 +28,11 @@ public class Navigator {
                 );
         Intent intent = new Intent(fromActivity, MainActivity.class);
 //        intent.putExtra("item_text", item.getCategoryName());
-        intent.putExtra("fragment_resource_id", R.layout.fragment_card_detail);
+        if (backgroundView instanceof LinearLayout){
+            intent.putExtra("fragment_resource_id", R.layout.fragment_statistic_detail);
+        }else{
+            intent.putExtra("fragment_resource_id", R.layout.fragment_card_detail);
+        }
 
         if (backgroundView != null){
             BitmapUtil.storeBitmapInIntent(BitmapUtil.createBitmap(backgroundView), intent);
