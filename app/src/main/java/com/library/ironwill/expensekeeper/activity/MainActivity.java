@@ -1,11 +1,13 @@
 package com.library.ironwill.expensekeeper.activity;
 
+import android.Manifest;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -17,6 +19,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.PopupMenu;
 import android.view.KeyEvent;
@@ -31,12 +34,12 @@ import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.MaterialMenuView;
 import com.jaeger.library.StatusBarUtil;
 import com.library.ironwill.expensekeeper.App;
+import com.library.ironwill.expensekeeper.BuildConfig;
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.fragment.CardDetailFragment;
 import com.library.ironwill.expensekeeper.fragment.CardListFragment;
 import com.library.ironwill.expensekeeper.fragment.CardStatisticFragment;
 import com.library.ironwill.expensekeeper.helper.TransitionHelper;
-import com.library.ironwill.expensekeeper.util.AppConfig;
 import com.library.ironwill.expensekeeper.util.BitmapUtil;
 import com.library.ironwill.expensekeeper.view.ArcProgress.ArcProgress;
 import com.library.ironwill.expensekeeper.view.DrawerItems.CustomPrimaryDrawerItem;
@@ -59,10 +62,10 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import immortalz.me.library.TransitionsHeleper;
 import immortalz.me.library.bean.InfoBean;
@@ -94,7 +97,7 @@ public class MainActivity extends TransitionHelper.BaseActivity implements DateP
     private CardListFragment cardListFragment = null;
 
     //Camera
-    private static Uri fileUri;
+    String mCurrentPhotoPath;
     private static final int MEDIA_TYPE_IMAGE = 1;
     private static final int MEDIA_TYPE_VIDEO = 2;
     private static final int PICK_IMAGE_FROM_ALBUM = 100;
@@ -115,6 +118,12 @@ public class MainActivity extends TransitionHelper.BaseActivity implements DateP
             cardListFragment = (CardListFragment) getFragmentManager().getFragment(savedInstanceState, "ListFragment");
         } else {
             cardListFragment = new CardListFragment();
+        }
+        if (checkSelfPermission(Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                    PICK_IMAGE_FROM_CAMERA);
         }
         if (isFirstLogin) {
             TransitionsHeleper.getInstance()
@@ -341,47 +350,53 @@ public class MainActivity extends TransitionHelper.BaseActivity implements DateP
                     dpd.setVersion(DatePickerDialog.Version.VERSION_1);
                     dpd.show(getFragmentManager(), "DatePickDialog");
                 } else {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    fileUri = Uri.fromFile(createOutputMediaFileName(MEDIA_TYPE_IMAGE));
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-                    // start the image capture Intent
-                    startActivityForResult(intent, PICK_IMAGE_FROM_CAMERA);
+
+                    String state = Environment.getExternalStorageState();
+                    if (state.equals(Environment.MEDIA_MOUNTED)) {
+                        Intent intent = new Intent();
+                        // 指定开启系统相机的Action
+                        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                        File outDir = Environment
+                                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                        if (!outDir.exists()) {
+                            outDir.mkdirs();
+                        }
+                        File outFile = new File(outDir, System.currentTimeMillis() + ".jpg");
+                        // 把文件地址转换成Uri格式
+                        Uri uri = null;
+                        try {
+                            uri = FileProvider.getUriForFile(MainActivity.this,
+                                    BuildConfig.APPLICATION_ID + ".provider",
+                                    createImageFile());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        // 设置系统相机拍摄照片完成后图片文件的存放地址
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                        // 此值在最低质量最小文件尺寸时是0，在最高质量最大文件尺寸时是１
+                        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
+                        startActivityForResult(intent, PICK_IMAGE_FROM_CAMERA);
+                    }
                 }
             }
         });
     }
 
-    /**
-     * returning image / video filename
-     */
-    private static File createOutputMediaFileName(int type) {
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM), "Camera");
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
 
-        // External sdcard location
-        File mediaStorageDir = new File(Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                AppConfig.IMAGE_DIRECTORY_NAME);
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                return null;
-            }
-        }
-
-        // Create a new media file name by timestamp
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date());
-        File photoFilename;
-        if (type == MEDIA_TYPE_IMAGE) {
-            photoFilename = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".jpg");
-        } else if (type == MEDIA_TYPE_VIDEO) {
-            photoFilename = new File(mediaStorageDir.getPath() + File.separator
-                    + "VID_" + timeStamp + ".mp4");
-        } else {
-            return null;
-        }
-        return photoFilename;
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
     }
 
     @Override

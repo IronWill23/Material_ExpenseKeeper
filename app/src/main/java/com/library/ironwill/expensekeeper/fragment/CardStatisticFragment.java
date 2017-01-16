@@ -26,7 +26,7 @@ import java.util.List;
 public class CardStatisticFragment extends TransitionHelper.BaseFragment {
 
 
-    private int[] mColors = {0xFFCCFF00, 0xFF6495ED, 0xFFE32636, 0xFF800000, 0xFF808000, 0xFFFF8C69, 0xFF808080,
+    private int[] mColors = {0xFF75C3FF, 0xFFFFD700, 0xFFE32636, 0xFF4CCC97, 0xFF808000, 0xFFFF8C69, 0xFF808080,
             0xFFE6B800, 0xFF7CFC00};
     private OverScrollView mScrollView;
     private View rootView;
