@@ -34,7 +34,7 @@ import com.library.ironwill.expensekeeper.view.RandomTextView.RandomTextView;
 
 import java.util.ArrayList;
 
-public class CardListFragment extends TransitionHelper.BaseFragment implements RvCategoryAdapter.OnRemoveItemListener{ // implements OnStartDragListener
+public class CardListFragment extends TransitionHelper.BaseFragment implements RvCategoryAdapter.OnRemoveItemListener { // implements OnStartDragListener
 
     //    private IronRecyclerView mRecyclerView;
     private RecyclerView mRecyclerView;

@@ -1,7 +1,6 @@
 package com.library.ironwill.expensekeeper.adapter;
 
 import android.app.Activity;
-import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.model.ItemCategory;
-import com.library.ironwill.expensekeeper.view.MaterialDelete.MaterialDeleteLayout;
+import com.library.ironwill.expensekeeper.view.MaterialDelete.ParticleLayout;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,9 +33,9 @@ public class ItemRvCategoryAdapter<T> extends RecyclerView.Adapter<ItemRvCategor
     }
 
     @Override
-    public void onBindViewHolder(final ItemRvCategoryAdapter<T>.ViewHolder holder, int position) {
+    public void onBindViewHolder(final ItemRvCategoryAdapter<T>.ViewHolder holder, final int position) {
         final ItemCategory category = (ItemCategory) items.get(position);
-        holder.mLayout.setDeleteListener(new MaterialDeleteLayout.SwipeDeleteListener() {
+        /*holder.mLayout.setDeleteListener(new MaterialDeleteLayout.SwipeDeleteListener() {
             @Override
             public void onDelete() {
                 int pos = (int) holder.mLayout.getTag();
@@ -52,8 +51,16 @@ public class ItemRvCategoryAdapter<T> extends RecyclerView.Adapter<ItemRvCategor
                 }, 1000);
             }
         });
-        holder.mLayout.setTag(position);
-//        holder.mLayout.setBitmapArrays(R.drawable.ic_partical, R.drawable.ic_partical);
+        holder.mLayout.setTag(position);*/
+        holder.mLayout.setDeleteListener(new ParticleLayout.DeleteListener() {
+            @Override
+            public void onDelete() {
+                items.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, items.size() - position);
+            }
+        });
+        holder.mLayout.setBitmapArrays(R.drawable.ic_partical, R.drawable.ic_partical);
         holder.mName.setText(category.getCategoryName());
         holder.mNum.setText(category.getMoneyNum());
         if (category.getColor() == 0) {
@@ -90,7 +97,7 @@ public class ItemRvCategoryAdapter<T> extends RecyclerView.Adapter<ItemRvCategor
         public TextView mNum;
         public ImageView mColor;
         public ImageView mDelete;
-        public MaterialDeleteLayout mLayout;
+        public ParticleLayout mLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -99,7 +106,7 @@ public class ItemRvCategoryAdapter<T> extends RecyclerView.Adapter<ItemRvCategor
             mColor = (ImageView) itemView.findViewById(R.id.category_color);
             mPic = (ImageView) itemView.findViewById(R.id.category_icon);
             mDelete = (ImageView) itemView.findViewById(R.id.iv_delete);
-            mLayout = (MaterialDeleteLayout) itemView.findViewById(R.id.delete_card_layout);
+            mLayout = (ParticleLayout) itemView.findViewById(R.id.delete_card_layout);
         }
     }
 }

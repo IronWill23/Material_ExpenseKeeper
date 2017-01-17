@@ -28,9 +28,11 @@
 
     <ImageView
         android:id="@+id/calendar_pick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="230dp"
+        android:layout_marginLeft="225dp"
+        android:padding="7dp"
+        android:background="@drawable/ripple_bg"
         />
 </LinearLayout>

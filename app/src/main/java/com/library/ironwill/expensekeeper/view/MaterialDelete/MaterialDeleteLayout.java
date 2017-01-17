@@ -8,12 +8,12 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.library.ironwill.expensekeeper.R;
 import com.plattysoft.leonids.ParticleSystem;
 
-public class MaterialDeleteLayout extends FrameLayout {
+public class MaterialDeleteLayout extends LinearLayout {
     private ViewDragHelper mViewDragHelper;
     private View mRightHideView;
     private View mContentView;
@@ -195,7 +195,10 @@ public class MaterialDeleteLayout extends FrameLayout {
                 getParent().requestDisallowInterceptTouchEvent(true);
                 break;
         }
-        return mViewDragHelper.shouldInterceptTouchEvent(ev);
+        if (mViewDragHelper.shouldInterceptTouchEvent(ev)) {
+            return true;
+        }
+        return super.onInterceptTouchEvent(ev);
     }
 
     @Override
@@ -215,7 +218,7 @@ public class MaterialDeleteLayout extends FrameLayout {
 
     public interface SwipeDeleteListener
     {
-        public void onDelete();
+        void onDelete();
     }
 
     private SwipeDeleteListener deleteListener;

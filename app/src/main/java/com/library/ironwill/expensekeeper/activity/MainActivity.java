@@ -170,7 +170,7 @@ public class MainActivity extends TransitionHelper.BaseActivity implements DateP
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             mArcProgress.setProgress(msg.arg1);
-            progressBarHandler.postDelayed(updateProgress, 27);
+            progressBarHandler.postDelayed(updateProgress, 33);
         }
     };
 
