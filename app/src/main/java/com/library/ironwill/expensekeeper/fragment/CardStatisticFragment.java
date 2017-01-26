@@ -3,7 +3,10 @@ package com.library.ironwill.expensekeeper.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +16,12 @@ import android.view.animation.DecelerateInterpolator;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.library.ironwill.expensekeeper.R;
 import com.library.ironwill.expensekeeper.activity.MainActivity;
+import com.library.ironwill.expensekeeper.adapter.TabAdapter;
 import com.library.ironwill.expensekeeper.helper.TransitionHelper;
-import com.library.ironwill.expensekeeper.model.PieModel;
 import com.library.ironwill.expensekeeper.util.Navigator;
 import com.library.ironwill.expensekeeper.view.OverScrollView.OverScrollView;
-import com.library.ironwill.expensekeeper.view.statisticView.PieChart;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class CardStatisticFragment extends TransitionHelper.BaseFragment {
@@ -30,7 +31,13 @@ public class CardStatisticFragment extends TransitionHelper.BaseFragment {
             0xFFE6B800, 0xFF7CFC00};
     private OverScrollView mScrollView;
     private View rootView;
-    private PieChart pieChart;
+    private TabLayout mTab;
+    private ViewPager mPager;
+    private PieChartFragment pieChartFragment;
+    private BarChartFragment barChartFragment;
+    private ArrayList<Fragment> listFragment;
+    private ArrayList<String> listTitle;
+
 
     public static CardStatisticFragment create() {
         CardStatisticFragment f = new CardStatisticFragment();
@@ -43,19 +50,8 @@ public class CardStatisticFragment extends TransitionHelper.BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_statistic_detail, container, false);
-        initView();
-
-        List<PieModel> dataEntities = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            PieModel entity = new PieModel("name" + i, i + 1, mColors[i]);
-            dataEntities.add(entity);
-        }
-        pieChart.setDataList(dataEntities);
-        pieChart.setOnItemPieClickListener(new PieChart.OnItemPieClickListener() {
-            @Override
-            public void onClick(int position) {
-            }
-        });
+        initControls(rootView);
+        mScrollView = (OverScrollView) rootView.findViewById(R.id.overscroll_view);
 
         mScrollView.setOverScrollListener(new OverScrollView.OverScrollListener() {
             int translationThreshold = 100;
@@ -76,23 +72,52 @@ public class CardStatisticFragment extends TransitionHelper.BaseFragment {
             }
         });
 
-        initDetailBody();
+//        initDetailBody();
         return rootView;
     }
 
-    private void initView() {
-        mScrollView = (OverScrollView) rootView.findViewById(R.id.overscroll_view);
-        pieChart = (PieChart) rootView.findViewById(R.id.pie_chart);
+    private void initControls(View view) {
+        mTab = (TabLayout) view.findViewById(R.id.tab_Fragment_title);
+        mPager = (ViewPager) view.findViewById(R.id.vp_Fragment_pager);
+
+        //初始化各fragment
+        pieChartFragment = new PieChartFragment();
+        barChartFragment = new BarChartFragment();
+
+        //将fragment装进列表中
+        listFragment = new ArrayList<>();
+        listFragment.add(pieChartFragment);
+        listFragment.add(barChartFragment);
+
+        //将名称加载tab名字列表，正常情况下，我们应该在values/arrays.xml中进行定义然后调用
+        listTitle = new ArrayList<>();
+        listTitle.add("PieChart");
+        listTitle.add("BarChart");
+
+        //设置TabLayout的模式
+        mTab.setTabMode(TabLayout.MODE_FIXED);
+        //为TabLayout添加tab名称
+        mTab.addTab(mTab.newTab().setText(listTitle.get(0)));
+        mTab.addTab(mTab.newTab().setText(listTitle.get(1)));
+
+        TabAdapter mAdapter = new TabAdapter(getActivity().getSupportFragmentManager(), listFragment, listTitle);
+
+        //viewpager加载adapter
+        mPager.setAdapter(mAdapter);
+        //mTab.setViewPager(vp_FindFragment_pager);
+        //TabLayout加载viewpager
+        mTab.setupWithViewPager(mPager);
+        //mTab.set
     }
 
-    private void initDetailBody() {
+/*    private void initDetailBody() {
         pieChart.setAlpha(0);
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 pieChart.animate().alpha(1).start();
             }
         }, 500);
-    }
+    }*/
 
     @Override
     public void onBeforeViewShows(View contentView) {
@@ -112,7 +137,7 @@ public class CardStatisticFragment extends TransitionHelper.BaseFragment {
     public boolean onBeforeBack() {
         MainActivity.of(getActivity()).animateHomeIcon(MaterialMenuDrawable.IconState.BURGER);
         MainActivity.of(getActivity()).fragmentBackground.animate().scaleX(1).scaleY(1).alpha(1).translationY(0).setDuration(Navigator.ANIM_DURATION).setInterpolator(new DecelerateInterpolator()).start();
-        TransitionHelper.fadeThenFinish(pieChart, getActivity());
+        TransitionHelper.fadeThenFinish(mScrollView, getActivity());
         return false;
     }
 }
