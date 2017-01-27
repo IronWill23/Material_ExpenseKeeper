@@ -1,6 +1,5 @@
 package com.library.ironwill.expensekeeper.fragment;
 
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 
 public class CardStatisticFragment extends TransitionHelper.BaseFragment {
 
-
     private int[] mColors = {0xFF75C3FF, 0xFFFFD700, 0xFFE32636, 0xFF4CCC97, 0xFF808000, 0xFFFF8C69, 0xFF808080,
             0xFFE6B800, 0xFF7CFC00};
     private OverScrollView mScrollView;
@@ -37,7 +35,7 @@ public class CardStatisticFragment extends TransitionHelper.BaseFragment {
     private BarChartFragment barChartFragment;
     private ArrayList<Fragment> listFragment;
     private ArrayList<String> listTitle;
-
+    private View mPlaceHolder;
 
     public static CardStatisticFragment create() {
         CardStatisticFragment f = new CardStatisticFragment();
@@ -52,6 +50,7 @@ public class CardStatisticFragment extends TransitionHelper.BaseFragment {
         rootView = inflater.inflate(R.layout.fragment_statistic_detail, container, false);
         initControls(rootView);
         mScrollView = (OverScrollView) rootView.findViewById(R.id.overscroll_view);
+        mPlaceHolder = rootView.findViewById(R.id.place_holder);
 
         mScrollView.setOverScrollListener(new OverScrollView.OverScrollListener() {
             int translationThreshold = 100;
@@ -72,7 +71,7 @@ public class CardStatisticFragment extends TransitionHelper.BaseFragment {
             }
         });
 
-//        initDetailBody();
+        initDetailBody();
         return rootView;
     }
 
@@ -110,14 +109,14 @@ public class CardStatisticFragment extends TransitionHelper.BaseFragment {
         //mTab.set
     }
 
-/*    private void initDetailBody() {
-        pieChart.setAlpha(0);
+    private void initDetailBody() {
+        mPlaceHolder.setAlpha(0);
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                pieChart.animate().alpha(1).start();
+                mPlaceHolder.animate().alpha(1).start();
             }
         }, 500);
-    }*/
+    }
 
     @Override
     public void onBeforeViewShows(View contentView) {
@@ -137,7 +136,7 @@ public class CardStatisticFragment extends TransitionHelper.BaseFragment {
     public boolean onBeforeBack() {
         MainActivity.of(getActivity()).animateHomeIcon(MaterialMenuDrawable.IconState.BURGER);
         MainActivity.of(getActivity()).fragmentBackground.animate().scaleX(1).scaleY(1).alpha(1).translationY(0).setDuration(Navigator.ANIM_DURATION).setInterpolator(new DecelerateInterpolator()).start();
-        TransitionHelper.fadeThenFinish(mScrollView, getActivity());
+        TransitionHelper.fadeThenFinish(mPlaceHolder, getActivity());
         return false;
     }
 }

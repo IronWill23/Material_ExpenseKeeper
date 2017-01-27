@@ -4,8 +4,6 @@ import android.Manifest;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -19,6 +17,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.PopupMenu;
@@ -115,7 +115,7 @@ public class MainActivity extends TransitionHelper.BaseActivity implements DateP
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
-            cardListFragment = (CardListFragment) getFragmentManager().getFragment(savedInstanceState, "ListFragment");
+            cardListFragment = (CardListFragment) getSupportFragmentManager().getFragment(savedInstanceState, "ListFragment");
         } else {
             cardListFragment = new CardListFragment();
         }
@@ -418,7 +418,7 @@ public class MainActivity extends TransitionHelper.BaseActivity implements DateP
 
         Fragment fragment = null;
         if (savedInstanceState != null) {
-            fragment = getFragmentManager().findFragmentByTag(BASE_FRAGMENT);
+            fragment = getSupportFragmentManager().findFragmentByTag(BASE_FRAGMENT);
         }
         if (fragment == null) fragment = getBaseFragment();
         setBaseFragment(fragment);
@@ -445,7 +445,7 @@ public class MainActivity extends TransitionHelper.BaseActivity implements DateP
 
     public void setBaseFragment(Fragment fragment) {
         if (fragment == null) return;
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.base_fragment, fragment, BASE_FRAGMENT);
         transaction.commit();
     }

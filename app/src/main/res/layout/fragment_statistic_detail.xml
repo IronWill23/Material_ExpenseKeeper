@@ -24,7 +24,7 @@
                 android:id="@+id/tab_Fragment_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorColor="@color/endBlue"
                 app:tabSelectedTextColor="@color/endBlue"
                 app:tabTextColor="@color/gray_cc" />
 
@@ -33,6 +33,12 @@
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
+
+            <View
+                android:id="@+id/place_holder"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:visibility="invisible" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </com.library.ironwill.expensekeeper.view.OverScrollView.OverScrollView>
