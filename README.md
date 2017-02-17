@@ -12,9 +12,10 @@ Done:
 
 ToDo:
 </br>1) Using Nodejs build Restful Api.
-</br>2) Setup the Disk/MemoryLruCache and MongoDB.
-</br>3) Immigrate the Native App to Hybrid by using ReactJs.
-</br>4) Customerize Icons and Action Listener.
+</br>2) Build up a Recipt scanner by extending Zxing library so that user could scan recipt to record the expense instead of inputting   numbers.
+</br>3) Setup the Disk/MemoryLruCache and MongoDB.
+</br>4) Immigrate the Native App to Hybrid by using ReactNative.
+</br>5) Customerize Icons and Action Listener.
 
 ### ScreenShots and Gif
 ![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/ExpenseKeeper_1.gif)
