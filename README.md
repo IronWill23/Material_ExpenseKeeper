@@ -17,7 +17,8 @@ ToDo:
 </br>4) Customerize Icons and Action Listener.
 
 ### ScreenShots and Gif
-![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/ExpenseKeeper.gif)
+![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/ExpenseKeeper_1.gif)
+![My image](https://github.com/IronWill23/Material_ExpenseKeeper/blob/master/preview/ExpenseKeeper_2.gif)
 
 ## Authors
 
