@@ -94,6 +94,7 @@ public class MainActivity extends TransitionHelper.BaseActivity implements DateP
     private long exitTime = 0;
     private static Boolean isFirstLogin = true;
     private static Boolean stopFlag = false;
+    private static Boolean mainFlag = true;
     private CardListFragment cardListFragment = null;
 
     //Camera
@@ -431,14 +432,17 @@ public class MainActivity extends TransitionHelper.BaseActivity implements DateP
             default:
                 calImage.setImageResource(R.drawable.ic_calendar);
                 App.isCalendarIcon = true;
+                mainFlag = true;
                 return new CardListFragment();
             case R.layout.fragment_card_detail:
                 calImage.setImageResource(R.drawable.ic_camera);
                 App.isCalendarIcon = false;
+                mainFlag = false;
                 return CardDetailFragment.create();
             case R.layout.fragment_statistic_detail:
                 calImage.setImageResource(R.drawable.ic_calendar);
                 App.isCalendarIcon = true;
+                mainFlag = false;
                 return CardStatisticFragment.create();
         }
     }
@@ -481,12 +485,13 @@ public class MainActivity extends TransitionHelper.BaseActivity implements DateP
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0 && mainFlag) {
                 this.exitApp();
+            }else {
+                return super.dispatchKeyEvent(event);
             }
-            return true;
         }
-        return super.dispatchKeyEvent(event);
+        return true;
     }
 
     private void exitApp() {
